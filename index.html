@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial scale="1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Career Quest</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>Career Quest</h1>
+        </header>
+        <section id="start-screen">
+            <h2>Welcome to Career Quest!</h2>
+            <p>Embark on an exciting journey to discover your dream career.</p>
+            <button id="start-btn" onclick="changeScreen()">Start</button>
+            <div class="instructions-container">
+                <button id="instructions-btn">Instructions</button>
+                <div class="modalcontainer" id="instructions-modal">
+                    <div class="modal" id="instructions-container">
+                        <h1>Instructions</h1>
+                        <p>Instructions go here</p>
+                        <button id="close-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="leaderboard-btn" onclick="showLeaderboard()">Leaderboard</button>
+            </div>
+        </section>
+        <section id="character-select">
+            <h2>Choose Your Character</h2>
+            <div class="character-options">
+                <div class="character-option">
+                    <img src="images/character1.png" alt="Character 1">
+                    <button class="character-btn" data-character="character1"
+                        onclick="selectCharacter('character1');changeScreen()">Select</button>
+                </div>
+                <div class="character-option">
+                    <img src="images/character2.png" alt="Character 2">
+                    <button class="character-btn" data-character="character2"
+                        onclick="selectCharacter('character2');changeScreen()">Select</button>
+                </div>
+                <div class="character-option">
+                    <img src="images/character3.png" alt="Character 3">
+                    <button class="character-btn" data-character="character3"
+                        onclick="selectCharacter('character3');changeScreen()">Select</button>
+                </div>
+            </div>
+        </section>
+        <section id="job-select">
+            <h2>Choose Your Job</h2>
+            <div class="job-options">
+                <div class="job-option">
+                    <img src="images/job1.png" alt="Job 1">
+                    <button class="job-btn" data-job="job1" onclick="selectJob('job1');changeScreen()">Select</button>
+                </div>
+                <div class="job-option">
+                    <img src="images/job2.png" alt="Job 2">
+                    <button class="job-btn" data-job="job2" onclick="selectJob('job2');changeScreen()">Select</button>
+                </div>
+                <div class="job-option">
+                    <img src="images/job3.png" alt="Job 3">
+                    <button class="job-btn" data-job="job3" onclick="selectJob('job3');changeScreen()">Select</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

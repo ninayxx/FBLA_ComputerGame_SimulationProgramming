@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'cs-buckle-drawn';
+    src: url('../assets/fonts/CsbuckledrawnRegularDemo-Wplzv.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'cs-areno-pixel';
+    src: url('../assets/fonts/CsArenoPixelRegularDemo-7Oz9D.otf') format('opentype');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 60%;
+    max-width: 1000px;
+    padding: 60px;
+}
+
+body {
+    background-color: #e1e3ed;
+    font-family: 'cs-buckle-drawn', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+
+    background-image: url('../assets/images/locations/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+p {
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+button {
+    background-color: #ffe2e2;
+    border: 2px solid #414141;
+    border-radius: 5px;
+    color: black;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'cs-buckle-drawn', sans-serif;
+}
+
+#start-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+#instructions-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#instructions-container {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 30px 50px;
+    width: 600px;
+    max-width: 100%;
+    text-align: center;
+}
+
+#instructions-container h1 {
+    margin: 0;
+}
+
+#instructions-container p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+#instructions-modal.show-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#character-select,
+#job-select {
+    display: none;
+}
