@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <main>
+<body id="bodyContainer">
+    <main id="mainContainer">
         <header>
             <h1>Career Quest</h1>
         </header>
@@ -32,31 +32,11 @@
                 <button id="leaderboard-btn" onclick="showLeaderboard()">Leaderboard</button>
             </div>
         </section>
-        <section id="character-select">
-            <h2>Choose Your Character</h2>
-            <div class="character-options">
-                <div class="character-option">
-                    <img src="images/character1.png" alt="Character 1">
-                    <button class="character-btn" data-character="character1"
-                        onclick="selectCharacter('character1');changeScreen()">Select</button>
-                </div>
-                <div class="character-option">
-                    <img src="images/character2.png" alt="Character 2">
-                    <button class="character-btn" data-character="character2"
-                        onclick="selectCharacter('character2');changeScreen()">Select</button>
-                </div>
-                <div class="character-option">
-                    <img src="images/character3.png" alt="Character 3">
-                    <button class="character-btn" data-character="character3"
-                        onclick="selectCharacter('character3');changeScreen()">Select</button>
-                </div>
-            </div>
-        </section>
         <section id="job-select">
             <h2>Choose Your Job</h2>
             <div class="job-options">
-                <div class="job-option">
-                    <img src="images/job1.png" alt="Job 1">
+                <div class="tech-job">
+                    <img src="assets/images/items/tech-job-image.png" alt="Job 1">
                     <button class="job-btn" data-job="job1" onclick="selectJob('job1');changeScreen()">Select</button>
                 </div>
                 <div class="job-option">

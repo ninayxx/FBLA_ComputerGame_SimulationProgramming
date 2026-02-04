@@ -13,14 +13,29 @@
 }
 
 main {
-    background-color: rgba(255, 255, 255, 0.85);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 60%;
     max-width: 1000px;
     padding: 60px;
+}
+
+#mainContainer {
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#start-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+#job-select {
+    background-color: none;
+    box-shadow: none;
 }
 
 body {
@@ -31,7 +46,10 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    justify-content: center;
+}
 
+#bodyContainer {
     background-image: url('../assets/images/locations/background.jpg');
     background-size: cover;
     background-position: center;
@@ -68,13 +86,6 @@ button {
     text-align: center;
     font-size: 1.2rem;
     font-family: 'cs-buckle-drawn', sans-serif;
-}
-
-#start-screen {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
 }
 
 #instructions-modal {
