@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Career Quest</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body id="bodyContainer">
@@ -36,18 +39,16 @@
             <h2>Choose Your Job</h2>
             <div class="job-options">
                 <div class="tech-job">
-                    <img src="assets/images/items/tech-job-image.png" alt="Job 1">
-                    <button class="job-btn" data-job="job1" onclick="selectJob('job1');changeScreen()">Select</button>
-                </div>
-                <div class="job-option">
-                    <img src="images/job2.png" alt="Job 2">
-                    <button class="job-btn" data-job="job2" onclick="selectJob('job2');changeScreen()">Select</button>
-                </div>
-                <div class="job-option">
-                    <img src="images/job3.png" alt="Job 3">
-                    <button class="job-btn" data-job="job3" onclick="selectJob('job3');changeScreen()">Select</button>
+                    <button class="tech-btn" data-job="tech-job" onclick="changeTechScreen()">
+                        <img src="/assets/images/items/tech-job-image.png" alt="tech-job">
+                    </button>
                 </div>
             </div>
+        </section>
+        </section>
+        <section id="tech-job-screen">
+            <h2>Tech Job</h2>
+            <p>You chose the tech job!</p>
         </section>
     </main>
     <script src="js/main.js"></script>

@@ -23,7 +23,20 @@ function changeScreen() {
     bodyContainer.style.backgroundImage = 'url(../assets/images/locations/job-selection-background.png)';
     bodyContainer.style.backgroundSize = '100% 100%';
     bodyContainer.style.alignItems = 'flex-start';
-    bodyContainer.style.paddingTop = '50px';
+    bodyContainer.style.paddingTop = '60px';
     mainContainer.style.backgroundColor = 'transparent';
     mainContainer.style.boxShadow = 'none';
+}
+
+function changeTechScreen() {
+    const jobSelectScreen = document.getElementById('job-select');
+    const techJobScreen = document.getElementById('tech-job-screen');
+    const bodyContainer = document.getElementById('bodyContainer');
+
+    jobSelectScreen.style.display = 'none';
+    techJobScreen.style.display = 'block';
+    bodyContainer.style.backgroundImage = 'url(../assets/images/locations/tech-job-background.png)';
+    bodyContainer.style.backgroundSize = '100% 100%';
+    bodyContainer.style.alignItems = 'flex-start';
+    bodyContainer.style.paddingTop = '60px';
 }

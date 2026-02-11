@@ -8,6 +8,12 @@
     src: url('../assets/fonts/CsArenoPixelRegularDemo-7Oz9D.otf') format('opentype');
 }
 
+.press-start-2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -59,6 +65,7 @@ body {
 
 h1 {
     font-size: 4rem;
+    font-family: 'Press Start 2P', system-ui;
     margin-bottom: 10px;
     color: #000000;
 }
@@ -71,7 +78,7 @@ h2 {
 
 p {
     margin-top: 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 30px;
     font-weight: bold;
 }
@@ -115,6 +122,7 @@ button {
 
 #instructions-container h1 {
     margin: 0;
+    font-family: 'cs-buckle-drawn', sans-serif;
 }
 
 #instructions-container p {
@@ -127,7 +135,49 @@ button {
     pointer-events: auto;
 }
 
-#character-select,
 #job-select {
     display: none;
+}
+
+#tech-job-screen {
+    display: none;
+}
+
+#job-select h2 {
+    font-size: 1.4rem;
+    color: #333;
+    font-family: 'Press Start 2P', system-ui;
+}
+
+.job-options button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+}
+
+.tech-btn {
+    top: 40%;
+    left: 50%;
+}
+
+button {
+    transition: transform 0.2s ease-in-out;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+button:not(.job-options button):hover {
+    transform: scale(1.1);
 }
