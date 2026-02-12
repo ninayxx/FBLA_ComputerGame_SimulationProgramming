@@ -1,0 +1,73 @@
+.tech-container {
+    display: flex;
+    width: 90%;
+    height: 80vh;
+    margin: 40px auto;
+    background: #ffd7d7;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.problem-panel {
+    width: 40%;
+    padding: 20px;
+    background: #ffffff;
+    color: #272727;
+    overflow-y: auto;
+}
+
+#problem-title {
+    color: #272727;
+    margin-top: 0;
+}
+
+.editor-panel {
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#code-editor {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #272727;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    outline: none;
+    border: none;
+}
+
+.editor-panel button {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+}
+
+#run-code-btn {
+    background: #8bd1e5;
+    color: rgb(72, 72, 72);
+}
+
+#submit-code-btn {
+    background: #b3f3c2;
+    color: rgb(72, 72, 72);
+}
+
+#output-console {
+    height: 150px;
+    background: #ffffff;
+    color: #272727;
+    padding: 10px;
+    font-family: monospace;
+    overflow-y: auto;
+}

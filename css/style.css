@@ -139,28 +139,30 @@ button {
     display: none;
 }
 
-#tech-job-screen {
-    display: none;
-}
-
 #job-select h2 {
     font-size: 1.4rem;
     color: #333;
     font-family: 'Press Start 2P', system-ui;
 }
 
-.job-options button {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+.job-link-btn {
+    display: inline-block;
     position: absolute;
     transform: translate(-50%, -50%);
     width: 300px;
     height: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.tech-btn {
+.job-link-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 10;
+}
+
+.tech-pos {
     top: 40%;
     left: 50%;
 }
@@ -175,10 +177,6 @@ img {
 }
 
 button:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-button:not(.job-options button):hover {
     transform: scale(1.1);
 }
 

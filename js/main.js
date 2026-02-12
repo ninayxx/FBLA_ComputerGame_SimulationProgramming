@@ -30,14 +30,7 @@ function changeScreen() {
 
 function changeTechScreen() {
     backgroundTransition('../assets/images/locations/tech-job-background.png', () => {
-        const jobSelectScreen = document.getElementById('job-select');
-        const techJobScreen = document.getElementById('tech-job-screen');
-        const bodyContainer = document.getElementById('bodyContainer');
-        jobSelectScreen.style.display = 'none';
-        techJobScreen.style.display = 'block';
-        bodyContainer.style.backgroundSize = '100% 100%';
-        bodyContainer.style.alignItems = 'flex-start';
-        bodyContainer.style.paddingTop = '60px';
+        window.location.href = 'tech_game.html';
     });
 }
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial scale="1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Career Quest</title>
+    <link rel="stylesheet" href="css/tech_game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section id="tech-job-screen">
+            <div class="tech-container">
+                <div class="problem-panel">
+                    <h2 id="problem-title">Loading...</h2>
+                    <div id="problem-desc">Select a challenge...</div>
+                </div>
+                <div class="editor-panel">
+                    <textarea id="code-editor" spellcheck="false"></textarea>
+                    <button id="run-code-btn" onclick="runCode()">Run</button>
+                    <div id="output-console">Output will appear here</div>
+                    <button id="submit-code-btn" onclick="submitCode()">Submit</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/jobs/questions.js"></script>
+    <script src="js/tech_game.js"></script>
+</body>
+
+</html>
