@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quest - Results</title>
+    <link rel="stylesheet" href="../css/results.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div class="results-container">
+            <h1 class="results-title">Results</h1>
+
+            <div class="score-display">
+                <div class="score-circle" id="score-circle">
+                    <span class="score-number" id="score-number">0</span>
+                    <span class="score-label">/ 100</span>
+                </div>
+            </div>
+
+            <div class="star-display" id="star-display"></div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <span class="stat-icon">⏱</span>
+                    <span class="stat-value" id="time-display">00:00</span>
+                    <span class="stat-label">Time</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎯</span>
+                    <span class="stat-value" id="accuracy-display">0%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+            </div>
+
+            <div class="results-buttons">
+                <button class="results-btn back-btn" onclick="goToJobSelect()">Back to Job Select</button>
+            </div>
+        </div>
+    </main>
+    <script src="../js/results.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Challenge</title>
+    <link rel="stylesheet" href="../css/tech_game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="../js/tech_questions.js"></script>
+</head>
+
+<body>
+    <div class="game-topbar">
+        <button class="topbar-btn" onclick="exitGame()">✕ Exit</button>
+        <div class="stopwatch" id="stopwatch">00:00</div>
+    </div>
+    <div class="game-container">
+        <div class="problem-panel">
+            <h2 id="problem-title" class="problem-title">Loading...</h2>
+            <div id="problem-desc" class="problem-desc"></div>
+            <div class="problem-panel-buttons">
+                <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+            </div>
+        </div>
+        <div class="editor-panel">
+            <textarea id="code-editor" class="code-editor" spellcheck="false">// Your code here...</textarea>
+            <div id="output-console" class="output-console">Output will appear here...</div>
+            <div class="editor-buttons">
+                <button class="control-btn run-btn" onclick="runCode()">Run</button>
+                <button class="control-btn submit-btn" onclick="submitCode()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay hidden" id="instructions-modal">
+        <div class="modal-box">
+            <h2>How to Play - Tech Challenge</h2>
+            <ul>
+                <li>Read the coding problem on the left panel</li>
+                <li>Write your JavaScript function in the editor</li>
+                <li>Click <strong>Run</strong> to test against 5 example cases</li>
+                <li>Check the output console for pass/fail results</li>
+                <li>Click <strong>Submit</strong> when you're ready — your score is based on accuracy (70%) and speed
+                    (30%)</li>
+                <li>Use <strong>Tab</strong> to indent your code</li>
+            </ul>
+            <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
+
+    <script src="../js/tech_game.js"></script>
+</body>
+
+</html>

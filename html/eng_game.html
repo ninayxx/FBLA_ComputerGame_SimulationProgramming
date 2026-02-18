@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quest - Engineering Game</title>
+    <link rel="stylesheet" href="../css/eng_game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-topbar">
+        <button class="topbar-btn exit-btn" onclick="exitGame()">✕ Exit</button>
+        <div class="stopwatch" id="stopwatch">00:00</div>
+    </div>
+
+    <main>
+        <div class="game-container">
+            <div class="circuit-board" id="circuit-board"></div>
+
+            <div class="toolbox">
+                <h3>Toolbox — Drag a gate onto the circuit</h3>
+                <div class="gates">
+                    <div class="gate" draggable="true" ondragstart="handleDragStart(event)" data-type="AND">AND</div>
+                    <div class="gate" draggable="true" ondragstart="handleDragStart(event)" data-type="OR">OR</div>
+                    <div class="gate" draggable="true" ondragstart="handleDragStart(event)" data-type="XOR">XOR</div>
+                    <div class="gate" draggable="true" ondragstart="handleDragStart(event)" data-type="NAND">NAND</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                <button class="control-btn" id="submit-btn" onclick="submitGame()">Submit</button>
+                <button class="control-btn hidden" id="next-level-btn" onclick="nextLevel()">New Problem &rarr;</button>
+                <button class="control-btn reset-btn" onclick="resetLevel()">Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay hidden" id="instructions-modal">
+        <div class="modal-box">
+            <h2>How to Play</h2>
+            <ul>
+                <li><strong>Toggle Inputs:</strong> Click the input switches (A, B, C, D) to set them to 0 or 1.</li>
+                <li><strong>Place Gates:</strong> Drag logic gates (AND, OR, XOR, NAND) from the toolbox onto the empty
+                    slots in the circuit.</li>
+                <li><strong>Goal:</strong> Make the light bulb turn ON by choosing the correct gates and input
+                    combination.</li>
+                <li><strong>Submit:</strong> Press Submit when you think your circuit is correct. Your score is based on
+                    accuracy and speed!</li>
+            </ul>
+            <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
+
+    <script src="../js/eng_questions.js"></script>
+    <script src="../js/eng_game.js"></script>
+</body>
+
+</html>
