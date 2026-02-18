@@ -18,7 +18,7 @@ function preloadSounds() {
     names.forEach(function (name) {
         soundPool[name] = [];
         for (var i = 0; i < poolSize; i++) {
-            var audio = new Audio('../assets/audio/sfx/' + name + '.mp3');
+            var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
             audio.preload = 'auto';
             audio.volume = 0.4;
             audio.load();
@@ -28,7 +28,7 @@ function preloadSounds() {
 }
 
 function startBackgroundMusic() {
-    bgMusic = new Audio('../assets/audio/music/tech-game.mp3');
+    bgMusic = new Audio('assets/audio/music/tech-game.mp3');
     bgMusic.loop = true;
     bgMusic.volume = 0.2;
     bgMusic.play().catch(function () {

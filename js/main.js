@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function startBackgroundMusic() {
     if (bgMusic && !bgMusic.paused) return;
-    bgMusic = new Audio('../assets/audio/music/background.mp3');
+    bgMusic = new Audio('assets/audio/music/background.mp3');
     bgMusic.loop = true;
     bgMusic.volume = 0.2;
     var playPromise = bgMusic.play();
@@ -42,7 +42,7 @@ function startBackgroundMusic() {
 
 function changeScreen() {
     playSound('click');
-    backgroundTransition('../assets/images/locations/job-selection-background.png', function () {
+    backgroundTransition('assets/images/locations/job-selection-background.png', function () {
         showJobSelect();
     });
 }
@@ -62,7 +62,7 @@ function showJobSelect() {
     mainContainer.style.width = '100%';
     mainContainer.style.maxWidth = '100%';
     mainContainer.style.borderRadius = '0';
-    bodyContainer.style.backgroundImage = "url('../assets/images/locations/job-selection-background.png')";
+    bodyContainer.style.backgroundImage = "url('assets/images/locations/job-selection-background.png')";
     bodyContainer.style.backgroundSize = '100% 100%';
     bodyContainer.style.alignItems = 'stretch';
     bodyContainer.style.padding = '0';
@@ -88,7 +88,7 @@ function goBackToHome() {
     mainContainer.style.width = '60%';
     mainContainer.style.maxWidth = '1000px';
     mainContainer.style.borderRadius = '20px';
-    bodyContainer.style.backgroundImage = "url('../assets/images/locations/background.jpg')";
+    bodyContainer.style.backgroundImage = "url('assets/images/locations/background.jpg')";
     bodyContainer.style.backgroundSize = 'cover';
     bodyContainer.style.alignItems = 'center';
     bodyContainer.style.padding = '';
@@ -131,13 +131,13 @@ function renderStarRating(containerId, score) {
         wrapper.className = 'star-wrapper';
 
         var bgImg = document.createElement('img');
-        bgImg.src = '../assets/images/items/star.png';
+        bgImg.src = 'assets/images/items/star.png';
         bgImg.className = 'star-bg';
         bgImg.alt = '';
         wrapper.appendChild(bgImg);
 
         var fillImg = document.createElement('img');
-        fillImg.src = '../assets/images/items/star.png';
+        fillImg.src = 'assets/images/items/star.png';
         fillImg.className = 'star-fill';
         fillImg.alt = '';
 
@@ -156,7 +156,7 @@ function renderStarRating(containerId, score) {
 
 function playSound(name) {
     try {
-        var audio = new Audio('../assets/audio/sfx/' + name + '.mp3');
+        var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
         audio.volume = 0.4;
         audio.play().catch(function () { });
     } catch (e) { }

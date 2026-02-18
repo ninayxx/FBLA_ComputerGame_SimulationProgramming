@@ -46,13 +46,13 @@ function renderStars(score) {
         wrapper.className = 'star-wrapper';
 
         var bgImg = document.createElement('img');
-        bgImg.src = '../assets/images/items/star.png';
+        bgImg.src = 'assets/images/items/star.png';
         bgImg.className = 'star-bg';
         bgImg.alt = 'star background';
         wrapper.appendChild(bgImg);
 
         var fillImg = document.createElement('img');
-        fillImg.src = '../assets/images/items/star.png';
+        fillImg.src = 'assets/images/items/star.png';
         fillImg.className = 'star-fill';
         fillImg.alt = 'star fill';
 
@@ -71,7 +71,7 @@ function renderStars(score) {
 
 function playResultSound(score) {
     try {
-        var soundFile = score >= 50 ? '../assets/audio/sfx/success.mp3' : '../assets/audio/sfx/failure.mp3';
+        var soundFile = score >= 50 ? 'assets/audio/sfx/success.mp3' : 'assets/audio/sfx/failure.mp3';
         var audio = new Audio(soundFile);
         audio.volume = 0.5;
         audio.play().catch(function () { });
@@ -85,7 +85,7 @@ function goToJobSelect() {
 
 function playSound(name) {
     try {
-        var audio = new Audio('../assets/audio/sfx/' + name + '.mp3');
+        var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
         audio.volume = 0.4;
         audio.play().catch(function () { });
     } catch (e) { }
