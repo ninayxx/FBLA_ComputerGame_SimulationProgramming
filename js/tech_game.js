@@ -2,6 +2,7 @@ var currentProblem = null;
 var timerSeconds = 0;
 var timerInterval = null;
 var bgMusic = null;
+var tickSound = null;
 var soundPool = {};
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -44,6 +45,19 @@ function startBackgroundMusic() {
 function startTimer() {
     timerSeconds = 0;
     clearInterval(timerInterval);
+
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
+
+    if (!tickSound) {
+        tickSound = new Audio('assets/audio/sfx/tick.mp3');
+        tickSound.loop = true;
+        tickSound.volume = 0.2;
+    }
+    tickSound.play().catch(function () { });
+
     timerInterval = setInterval(function () {
         timerSeconds++;
         var m = Math.floor(timerSeconds / 60);
@@ -120,6 +134,10 @@ function runCode() {
 function submitCode() {
     playSound('click');
     clearInterval(timerInterval);
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
     var results = runCode();
     var accuracy = results.total > 0 ? (results.passed / results.total) * 100 : 0;
     var timePenalty = 0;
@@ -130,10 +148,10 @@ function submitCode() {
     var score = Math.round((accuracy / 100) * 70 + timeScore);
     score = Math.max(0, Math.min(100, score));
 
-    localStorage.setItem('gameType', 'tech');
-    localStorage.setItem('timeTaken', timerSeconds);
-    localStorage.setItem('accuracy', accuracy);
-    localStorage.setItem('score', score);
+    sessionStorage.setItem('gameType', 'tech');
+    sessionStorage.setItem('timeTaken', timerSeconds);
+    sessionStorage.setItem('accuracy', accuracy);
+    sessionStorage.setItem('score', score);
 
     if (bgMusic) bgMusic.pause();
 
@@ -157,6 +175,10 @@ function exitGame() {
     playSound('click');
     clearInterval(timerInterval);
     if (bgMusic) bgMusic.pause();
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
     window.location.href = 'index.html#job-select';
 }
 

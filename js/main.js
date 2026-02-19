@@ -107,8 +107,8 @@ function backgroundTransition(newURL, callback) {
 }
 
 function renderAllStars() {
-    var techScore = parseInt(localStorage.getItem('techGameScore') || '0');
-    var engScore = parseInt(localStorage.getItem('engGameScore') || '0');
+    var techScore = parseInt(sessionStorage.getItem('techGameScore') || '0');
+    var engScore = parseInt(sessionStorage.getItem('engGameScore') || '0');
     renderStarRating('tech-stars', techScore);
     renderStarRating('eng-stars', engScore);
 }

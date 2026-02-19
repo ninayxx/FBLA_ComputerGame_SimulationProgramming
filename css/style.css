@@ -27,7 +27,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
 }
 
 main {
@@ -181,9 +181,14 @@ img {
 
 .job-card img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    height: 40vmin;
+    object-fit: contain;
+    border-radius: 0;
     pointer-events: none;
+}
+
+.large-job-btn img {
+    height: 22vmin;
 }
 
 .star-rating {

@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var gameType = localStorage.getItem('gameType') || 'unknown';
-    var timeTaken = parseInt(localStorage.getItem('timeTaken') || '0');
-    var accuracy = parseFloat(localStorage.getItem('accuracy') || '0');
-    var score = parseInt(localStorage.getItem('score') || '0');
+    var gameType = sessionStorage.getItem('gameType') || 'unknown';
+    var timeTaken = parseInt(sessionStorage.getItem('timeTaken') || '0');
+    var accuracy = parseFloat(sessionStorage.getItem('accuracy') || '0');
+    var score = parseInt(sessionStorage.getItem('score') || '0');
 
     var minutes = Math.floor(timeTaken / 60);
     var seconds = timeTaken % 60;
@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     renderStars(score);
 
     if (gameType === 'eng') {
-        localStorage.setItem('engGameScore', score);
+        sessionStorage.setItem('engGameScore', score);
     } else if (gameType === 'tech') {
-        localStorage.setItem('techGameScore', score);
+        sessionStorage.setItem('techGameScore', score);
     }
 
     playResultSound(score);

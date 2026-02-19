@@ -5,6 +5,7 @@ var wireStates = {};
 var timerSeconds = 0;
 var timerInterval = null;
 var bgMusic = null;
+var tickSound = null;
 var soundPool = {};
 var lastBulbState = false;
 var bulbSoundTimeout = null;
@@ -49,6 +50,19 @@ function startBackgroundMusic() {
 function startTimer() {
     timerSeconds = 0;
     clearInterval(timerInterval);
+
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
+
+    if (!tickSound) {
+        tickSound = new Audio('assets/audio/sfx/tick.mp3');
+        tickSound.loop = true;
+        tickSound.volume = 0.2;
+    }
+    tickSound.play().catch(function () { });
+
     timerInterval = setInterval(function () {
         timerSeconds++;
         var m = Math.floor(timerSeconds / 60);
@@ -291,6 +305,10 @@ function computeGate(type, a, b) {
 function submitGame() {
     playSound('click');
     clearInterval(timerInterval);
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
     var bulb = document.getElementById('outputBulb');
     var isLit = bulb && bulb.classList.contains('lit');
     var accuracy = isLit ? 100 : 0;
@@ -310,10 +328,10 @@ function submitGame() {
     var score = Math.round((accuracy / 100) * 70 + timeScore);
     score = Math.max(0, Math.min(100, score));
 
-    localStorage.setItem('gameType', 'eng');
-    localStorage.setItem('timeTaken', timerSeconds);
-    localStorage.setItem('accuracy', accuracy);
-    localStorage.setItem('score', score);
+    sessionStorage.setItem('gameType', 'eng');
+    sessionStorage.setItem('timeTaken', timerSeconds);
+    sessionStorage.setItem('accuracy', accuracy);
+    sessionStorage.setItem('score', score);
 
     if (bgMusic) bgMusic.pause();
 
@@ -337,6 +355,10 @@ function exitGame() {
     playSound('click');
     clearInterval(timerInterval);
     if (bgMusic) bgMusic.pause();
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
     window.location.href = 'index.html#job-select';
 }
 
