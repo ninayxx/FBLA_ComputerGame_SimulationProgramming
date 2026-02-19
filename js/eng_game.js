@@ -9,18 +9,66 @@ var tickSound = null;
 var soundPool = {};
 var lastBulbState = false;
 var bulbSoundTimeout = null;
+var introAudios = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
+    playIntro();
+});
+
+function playIntro() {
+    var overlay = document.getElementById('intro-overlay');
+    var video = document.getElementById('intro-video');
+    var skipBtn = document.getElementById('skip-intro');
+    var playBtn = document.getElementById('play-intro-btn');
+
+    if (!overlay || !video) {
+        startGame();
+        return;
+    }
+
+    // Prepare background sounds (drilling + sawing)
+    var soundFiles = ['drilling', 'sawing'];
+    introAudios = soundFiles.map(function (name) {
+        var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
+        audio.volume = 0.4;
+        audio.loop = true;
+        return audio;
+    });
+
+    function stopIntro() {
+        video.pause();
+        introAudios.forEach(function (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+        overlay.style.display = 'none';
+        startGame();
+    }
+
+    function startPlayback() {
+        playBtn.style.display = 'none';
+        video.play().catch(function () { });
+        introAudios.forEach(function (audio) {
+            audio.play().catch(function () { });
+        });
+    }
+
+    video.addEventListener('ended', stopIntro);
+    if (skipBtn) skipBtn.addEventListener('click', function () { playSound('click'); stopIntro(); });
+    if (playBtn) playBtn.addEventListener('click', function () { playSound('click'); startPlayback(); });
+}
+
+function startGame() {
     startTimer();
     loadNewLevel();
     startBackgroundMusic();
     showInstructions();
-});
+}
 
 function preloadSounds() {
     var names = ['click', 'drop', 'success', 'failure'];
-    var poolSize = 3;
+    var poolSize = 5;
     names.forEach(function (name) {
         soundPool[name] = [];
         for (var i = 0; i < poolSize; i++) {
@@ -34,7 +82,7 @@ function preloadSounds() {
 }
 
 function startBackgroundMusic() {
-    bgMusic = new Audio('assets/audio/music/eng-game.mp3');
+    bgMusic = new Audio('assets/audio/music/gameplay.mp3');
     bgMusic.loop = true;
     bgMusic.volume = 0.2;
     bgMusic.play().catch(function () {
@@ -363,6 +411,7 @@ function exitGame() {
 }
 
 function showInstructions() {
+    playSound('click');
     var modal = document.getElementById('instructions-modal');
     if (modal) modal.classList.remove('hidden');
 }

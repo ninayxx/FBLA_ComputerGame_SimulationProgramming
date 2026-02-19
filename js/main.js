@@ -72,6 +72,11 @@ function showJobSelect() {
     }
 }
 
+function showLeaderboard() {
+    playSound('click');
+    alert("Leaderboard feature coming soon!");
+}
+
 function goBackToHome() {
     playSound('click');
     var startScreen = document.getElementById('start-screen');
@@ -154,10 +159,39 @@ function renderStarRating(containerId, score) {
     }
 }
 
+var mainSoundPool = {};
+
+(function preloadMainSounds() {
+    var names = ['click'];
+    var poolSize = 5;
+    names.forEach(function (name) {
+        mainSoundPool[name] = [];
+        for (var i = 0; i < poolSize; i++) {
+            var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
+            audio.preload = 'auto';
+            audio.volume = 0.4;
+            audio.load();
+            mainSoundPool[name].push(audio);
+        }
+    });
+})();
+
 function playSound(name) {
     try {
-        var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
-        audio.volume = 0.4;
-        audio.play().catch(function () { });
+        var pool = mainSoundPool[name];
+        if (pool && pool.length > 0) {
+            var audio = null;
+            for (var i = 0; i < pool.length; i++) {
+                if (pool[i].paused || pool[i].ended) {
+                    audio = pool[i];
+                    break;
+                }
+            }
+            if (!audio) {
+                audio = pool[0];
+            }
+            audio.currentTime = 0;
+            audio.play().catch(function () { });
+        }
     } catch (e) { }
 }
