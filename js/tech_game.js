@@ -8,7 +8,6 @@ var soundPool = {};
 var introAudios = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Game initialization is now deferred until after intro
     preloadSounds();
     playIntro();
 });
@@ -24,7 +23,6 @@ function playIntro() {
         return;
     }
 
-    // Prepare background sounds
     var soundFiles = ['background-noise', 'chatter', 'typing'];
     introAudios = soundFiles.map(function (name) {
         var audio = new Audio('assets/audio/sfx/' + name + '.mp3');

@@ -12,8 +12,8 @@ const questions = [
             { input: [[3, 3], 6], expected: [0, 1] },
             { input: [[-1, -2, -3, -4, -5], -8], expected: [2, 4] },
             { input: [[0, 4, 3, 0], 0], expected: [0, 3] },
-            { input: [[1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1], 11], expected: [5, 11] }, // Large array
-            { input: [[1000000, 500000, 500000], 1000000], expected: [1, 2] }, // Large numbers
+            { input: [[1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1], 11], expected: [5, 11] },
+            { input: [[1000000, 500000, 500000], 1000000], expected: [1, 2] },
             { input: [[2, 5, 5, 11], 10], expected: [1, 2] }
         ]
     },
@@ -354,8 +354,8 @@ const questions = [
             { input: [5], expected: 8 },
             { input: [6], expected: 13 },
             { input: [10], expected: 89 },
-            { input: [45], expected: 1836311903 }, // Edge case: Large n
-            { input: [0], expected: 0 } // Depending on interpretation, usually 0 or 1. Let's say 0 for 0 steps.
+            { input: [45], expected: 1836311903 },
+            { input: [0], expected: 0 }
         ]
     },
 
@@ -375,7 +375,7 @@ const questions = [
             { input: [0], expected: false },
             { input: [-16], expected: false },
             { input: [1024], expected: true },
-            { input: [2147483648], expected: true } // 2^31
+            { input: [2147483648], expected: true }
         ]
     },
     {
@@ -528,7 +528,7 @@ const questions = [
             { input: [[], [1]], expected: [] },
             { input: [[1], []], expected: [] },
             { input: [[1], [1]], expected: [1] },
-            { input: [[1, 2], [2, 1]], expected: [1, 2] }, // Order might vary, usually set equality. Game logic uses simple stirngify so specific order might be needed or logic refined. Assuming simple cases or specific order for now.
+            { input: [[1, 2], [2, 1]], expected: [1, 2] },
             { input: [[1, 2, 2, 1], [2, 2, 2]], expected: [2] }
         ]
     },
@@ -560,9 +560,9 @@ const questions = [
         testCases: [
             { input: [43261596], expected: 964176192 },
             { input: [0], expected: 0 },
-            { input: [1], expected: 2147483648 }, // 1 << 31
+            { input: [1], expected: 2147483648 },
             { input: [2147483648], expected: 1 },
-            { input: [4294967295], expected: 4294967295 }, // All 1s
+            { input: [4294967295], expected: 4294967295 },
             { input: [3], expected: 3221225472 },
             { input: [6], expected: 1610612736 },
             { input: [10], expected: 1342177280 }
@@ -649,8 +649,8 @@ const questions = [
         testCases: [
             { input: [[[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]], expected: true },
             { input: [[[1, 1], [2, 2], [3, 4], [4, 5], [5, 6], [7, 7]]], expected: false },
-            { input: [[[0, 0], [0, 1], [0, -1]]], expected: true }, // Vertical line
-            { input: [[[1, 1], [2, 1], [3, 1]]], expected: true }, // Horizontal line
+            { input: [[[0, 0], [0, 1], [0, -1]]], expected: true },
+            { input: [[[1, 1], [2, 1], [3, 1]]], expected: true },
             { input: [[[0, 0], [1, 2], [2, 1]]], expected: false },
             { input: [[[1, 2], [2, 3]]], expected: true },
             { input: [[[2, 1], [4, 2], [6, 3]]], expected: true }
@@ -685,8 +685,8 @@ const questions = [
             { input: ["a", "aa"], expected: "a" },
             { input: ["ae", "aea"], expected: "a" },
             { input: ["wx", "wyx"], expected: "y" },
-            { input: ["abc", "acb"], expected: undefined }, // Should handle logic error or return undefined if logic is find extra char. Wait, problem says t has one more.
-            // Actually test cases assume t has one extra char.
+            { input: ["abc", "acb"], expected: undefined },
+
             { input: ["abc", "abce"], expected: "e" },
             { input: ["random", "randonm"], expected: "n" }
         ]
@@ -721,7 +721,7 @@ const questions = [
             { input: [[1, 0, 0, 0, 1], 2], expected: false },
             { input: [[0, 0, 0, 0, 0], 3], expected: true },
             { input: [[1, 0, 1, 0, 1], 1], expected: false },
-            { input: [[0, 0, 0, 0, 0], 4], expected: false }, // Only 3 can fit
+            { input: [[0, 0, 0, 0, 0], 4], expected: false },
             { input: [[0], 1], expected: true },
             { input: [[0, 0, 1], 1], expected: true },
             { input: [[1], 0], expected: true }
@@ -756,7 +756,7 @@ const questions = [
             { input: ["abc", "bca"], expected: true },
             { input: ["abc", "cab"], expected: true },
             { input: ["a", "a"], expected: true },
-            { input: ["aa", "a"], expected: false }, // Length check
+            { input: ["aa", "a"], expected: false },
             { input: ["", ""], expected: true },
             { input: ["geeks", "eksge"], expected: true }
         ]
@@ -769,11 +769,11 @@ const questions = [
         initialCode: "function backspaceCompare(s, t) { \n    \n}",
         testCases: [
             { input: ["ab#c", "ad#c"], expected: true },
-            { input: ["ab##", "c#d#"], expected: true }, // Both ""
-            { input: ["a##c", "#a#c"], expected: true }, // Both "c"
+            { input: ["ab##", "c#d#"], expected: true },
+            { input: ["a##c", "#a#c"], expected: true },
             { input: ["a#c", "b"], expected: false },
-            { input: ["y#fo##f", "y#f#o##f"], expected: true }, // "f" vs "f"
-            { input: ["#a", "a"], expected: true }, // "a" vs "a"
+            { input: ["y#fo##f", "y#f#o##f"], expected: true },
+            { input: ["#a", "a"], expected: true },
             { input: ["###", ""], expected: true },
             { input: ["abc", "abc"], expected: true }
         ]
@@ -807,7 +807,7 @@ const questions = [
             { input: [2], expected: 1 },
             { input: [3], expected: 2 },
             { input: [5], expected: 7 },
-            { input: [37], expected: 2082876103 } // Edge case: Large n, fits in standard 32-bit int? 2B fits in signed 32-bit (max 2.14B).
+            { input: [37], expected: 2082876103 }
         ]
     },
     {
@@ -817,10 +817,10 @@ const questions = [
         description: "Given an integer n, return the difference between the product of its digits and the sum of its digits.",
         initialCode: "function subtractProductAndSum(n) { \n    \n}",
         testCases: [
-            { input: [234], expected: 15 }, // 24 - 9 = 15
-            { input: [4421], expected: 21 }, // 32 - 11 = 21
+            { input: [234], expected: 15 },
+            { input: [4421], expected: 21 },
             { input: [1], expected: 0 },
-            { input: [1000], expected: -1 }, // 0 - 1 = -1
+            { input: [1000], expected: -1 },
             { input: [705], expected: -12 },
             { input: [11], expected: -1 },
             { input: [123456], expected: 699 }
@@ -840,7 +840,7 @@ const questions = [
             { input: [1], expected: 0 },
             { input: [2], expected: 1 },
             { input: [8], expected: 7 },
-            { input: [1000000000], expected: 73741823 } // 101110111001101011001010000000 (30 bits)
+            { input: [1000000000], expected: 73741823 }
         ]
     },
     {

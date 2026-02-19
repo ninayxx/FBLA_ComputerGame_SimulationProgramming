@@ -27,7 +27,6 @@ function playIntro() {
         return;
     }
 
-    // Prepare background sounds (drilling + sawing)
     var soundFiles = ['drilling', 'sawing'];
     introAudios = soundFiles.map(function (name) {
         var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
@@ -315,7 +314,6 @@ function evaluateCircuit() {
     if (isNowLit) bulb.classList.add('lit');
     else bulb.classList.remove('lit');
 
-    // Play sound when bulb state changes
     if (isNowLit !== lastBulbState) {
         if (bulbSoundTimeout) clearTimeout(bulbSoundTimeout);
         bulbSoundTimeout = setTimeout(function () {

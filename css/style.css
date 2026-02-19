@@ -93,7 +93,6 @@ img {
     height: auto;
 }
 
-/* Instructions modal on index page */
 #instructions-modal {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -154,7 +153,6 @@ img {
     pointer-events: auto;
 }
 
-/* Job select section */
 #job-select {
     display: none;
 }
