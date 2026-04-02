@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Career - Coloring Grid</title>
+    <link rel="stylesheet" href="css/art_game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-topbar">
+        <h2>Art Coloring Challenge</h2>
+        <button class="topbar-btn" id="exit-btn">✕ Exit</button>
+    </div>
+
+    <main class="art-game-main">
+        <h1>Copy the Sample Grid</h1>
+        <p>Choose a color from the palette and fill the right grid to match the left sample exactly.</p>
+
+        <div class="panels">
+            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa     Grid</h2>
+                <div style="text-align: center; margin-bottom: 8px;">Current color:
+                    <span id="target-color-indicator"></span> <span id="selected-color-code"></span>
+                </div>
+                <div id="tool-palette" class="palette"></div>
+                <div id="player-grid" class="art-grid"></div>
+                <div class="controls">
+                    <button id="check-btn" class="control-btn">Check</button>
+                    <button id="clear-btn" class="control-btn">Clear</button>
+                    <button id="next-btn" class="control-btn">Next</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="scoreboard" class="scoreboard"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/art_questions.js"></script>
+    <script src="js/art_game.js"></script>
+</body>
+</html>
