@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,35 +9,69 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="game-topbar">
-        <h2>Art Coloring Challenge</h2>
-        <button class="topbar-btn" id="exit-btn">✕ Exit</button>
+    <div id="intro-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: black; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="letterbox-bar" style="width: 100%; height: 12%; background: black; flex-shrink: 0;"></div>
+        <video id="intro-video" src="assets/videos/art-game.mp4" style="width: 100%; flex: 1; object-fit: cover;"
+            playsinline></video>
+        <div class="letterbox-bar" style="width: 100%; height: 12%; background: black; flex-shrink: 0;"></div>
+        <button id="play-intro-btn"
+            style="position: absolute; z-index: 10001; padding: 20px 40px; font-family: 'Press Start 2P', monospace; font-size: 20px; background: rgba(76, 175, 80, 0.9); color: white; border: none; border-radius: 8px; cursor: pointer;">▶
+            PLAY</button>
+        <button id="skip-intro"
+            style="position: absolute; bottom: 50px; right: 30px; padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 12px; background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white; border-radius: 4px; cursor: pointer; z-index: 10000;">SKIP
+            >></button>
     </div>
 
-    <main class="art-game-main">
-        <h1>Copy the Sample Grid</h1>
-        <p>Choose a color from the palette and fill the right grid to match the left sample exactly.</p>
+    <div class="game-topbar">
+        <button class="topbar-btn exit-btn" onclick="exitGame()">✕ Exit</button>
+        <div class="stopwatch" id="stopwatch">00:00</div>
+    </div>
 
-        <div class="panels">
-            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa            <section class="pa     Grid</h2>
+    <main class="game-container art-game-main">
+        <section class="panel sample-panel">
+            <section class="panel-inner">
+                <h2>Sample Grid</h2>
+                <div id="sample-grid" class="art-grid"></div>
+            </section>
+        </section>
+        <section class="panel draw-panel">
+            <section class="panel-inner">
+                <h2>Your Grid</h2>
                 <div style="text-align: center; margin-bottom: 8px;">Current color:
                     <span id="target-color-indicator"></span> <span id="selected-color-code"></span>
                 </div>
                 <div id="tool-palette" class="palette"></div>
                 <div id="player-grid" class="art-grid"></div>
                 <div class="controls">
-                    <button id="check-btn" class="control-btn">Check</button>
-                    <button id="clear-btn" class="control-btn">Clear</button>
-                    <button id="next-btn" class="control-btn">Next</button>
+                    <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                    <button id="check-btn" class="control-btn submit-btn">Submit</button>
+                    <button class="control-btn reset-btn" onclick="clearGrid()">Clear</button>
                 </div>
                 <div id="feedback" class="feedback"></div>
-                <div id="scoreboard" class="scoreboard"></div>
             </section>
-        </div>
+        </section>
     </main>
+
+    <div class="modal-overlay hidden" id="instructions-modal">
+        <div class="modal-box">
+            <h2>How to Play - Art Challenge</h2>
+            <ul>
+                <li>Look at the <strong>Sample Grid</strong> on the left — this shows the pattern you need to copy</li>
+                <li>Choose colors from the <strong>palette</strong> below the current color indicator</li>
+                <li>Click cells in the <strong>Your Grid</strong> to fill them with your selected color</li>
+                <li>Match the sample grid <strong>exactly</strong> to get a perfect score</li>
+                <li>You only get <strong>one submit</strong>, so check your drawing carefully</li>
+                <li>Your score is based on accuracy (70%) and speed (30%)</li>
+            </ul>
+            <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
 
     <script src="js/art_questions.js"></script>
     <script src="js/art_game.js"></script>
 </body>
+
 </html>

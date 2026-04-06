@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.setItem('engGameScore', score);
     } else if (gameType === 'tech') {
         sessionStorage.setItem('techGameScore', score);
+    } else if (gameType === 'art') {
+        sessionStorage.setItem('artGameScore', score);
     }
 
     playResultSound(score);

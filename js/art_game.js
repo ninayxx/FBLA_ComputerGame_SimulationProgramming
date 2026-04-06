@@ -1,27 +1,158 @@
-let currentQuestion = null;
-let selectedColor = null;
-let userGrid = [];
-let gameStats = { attempts: 0, bestScore: 0 };
+var currentQuestion = null;
+var selectedColor = null;
+var userGrid = [];
+var timerSeconds = 0;
+var timerInterval = null;
+var bgMusic = null;
+var tickSound = null;
+var soundPool = {};
+var hasSubmitted = false;
 
-function initArtGame() {
-    document.getElementById('exit-btn').addEventListener('click', function () {
-        window.location.href = 'index.html';
+var introAudios = [];
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    preloadSounds();
+    playIntro();
+});
+
+function playIntro() {
+    var overlay = document.getElementById('intro-overlay');
+    var video = document.getElementById('intro-video');
+    var skipBtn = document.getElementById('skip-intro');
+    var playBtn = document.getElementById('play-intro-btn');
+
+    if (!overlay || !video) {
+        startGame();
+        return;
+    }
+
+    var soundFiles = ['painting', 'pencil'];
+    introAudios = soundFiles.map(function (name) {
+        var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
+        audio.volume = 0.4;
+        audio.loop = true;
+        return audio;
     });
-    document.getElementById('check-btn').addEventListener('click', checkAnswer);
-    document.getElementById('clear-btn').addEventListener('click', clearPlayerGrid);
-    document.getElementById('next-btn').addEventListener('click', nextQuestion);
-    nextQuestion();
+
+    var introFinished = false;
+
+    function stopIntro() {
+        if (introFinished) return;
+        introFinished = true;
+        video.pause();
+        introAudios.forEach(function (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+        overlay.style.display = 'none';
+        startGame();
+    }
+
+    function startPlayback() {
+        playBtn.style.display = 'none';
+        video.play().catch(function () { });
+        introAudios.forEach(function (audio) {
+            audio.play().catch(function () { });
+        });
+    }
+
+    video.addEventListener('ended', stopIntro);
+    video.addEventListener('error', stopIntro);
+    if (skipBtn) skipBtn.addEventListener('click', function () { playSound('click'); stopIntro(); });
+    if (playBtn) playBtn.addEventListener('click', function () { playSound('click'); startPlayback(); });
+
+    // If the intro video asset is missing, continue into gameplay automatically.
+    setTimeout(function () {
+        if (!introFinished && (video.error || video.networkState === video.NETWORK_NO_SOURCE)) {
+            stopIntro();
+        }
+    }, 1200);
 }
 
-function nextQuestion() {
-    currentQuestion = getRandomArtQuestion();
+function startGame() {
+    startTimer();
+    initArtGame();
+    startBackgroundMusic();
+    showInstructions();
+}
+
+function preloadSounds() {
+    var names = ['click', 'drop', 'splash', 'success', 'failure'];
+    var poolSize = 5;
+    names.forEach(function (name) {
+        soundPool[name] = [];
+        for (var i = 0; i < poolSize; i++) {
+            var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
+            audio.preload = 'auto';
+            if (name === 'splash') {
+                audio.volume = 0.2;
+            } else {
+                audio.volume = 0.4;
+            }
+            audio.load();
+            soundPool[name].push(audio);
+        }
+    });
+}
+
+function startBackgroundMusic() {
+    bgMusic = new Audio('assets/audio/music/gameplay.mp3');
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
+    bgMusic.play().catch(function () {
+        document.addEventListener('click', function tryPlay() {
+            if (bgMusic) {
+                bgMusic.play().catch(function () { });
+            }
+            document.removeEventListener('click', tryPlay);
+        });
+    });
+}
+
+function startTimer() {
+    timerSeconds = 0;
+    clearInterval(timerInterval);
+
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
+
+    if (!tickSound) {
+        tickSound = new Audio('assets/audio/sfx/tick.mp3');
+        tickSound.loop = true;
+        tickSound.volume = 0.2;
+    }
+    tickSound.play().catch(function () { });
+
+    timerInterval = setInterval(function () {
+        timerSeconds++;
+        var m = Math.floor(timerSeconds / 60);
+        var s = timerSeconds % 60;
+        document.getElementById('stopwatch').textContent =
+            String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }, 1000);
+}
+
+function initArtGame() {
+    var submitBtn = document.getElementById('check-btn');
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
+        submitBtn.onclick = checkAnswer;
+    }
+    hasSubmitted = false;
+    loadNewProblem();
+}
+
+function loadNewProblem() {
+    var randomIndex = Math.floor(Math.random() * artQuestions.length);
+    currentQuestion = artQuestions[randomIndex];
     selectedColor = currentQuestion.palette[1] || '#000000';
     buildPalette(currentQuestion.palette);
     renderSampleGrid();
     buildPlayerGrid();
-    setFeedback('New challenge loaded: ' + currentQuestion.title + '. Copy the pattern exactly.');
-    updateScoreboard();
-    sessionStorage.setItem('artGameScore', '0');
 }
 
 function buildPalette(palette) {
@@ -54,8 +185,8 @@ function renderSampleGrid() {
     sampleContainer.innerHTML = '';
     const rows = currentQuestion.rows;
     const cols = currentQuestion.cols;
-    sampleContainer.style.gridTemplateColumns = `repeat(${cols}, 36px)`;
-    sampleContainer.style.gridTemplateRows = `repeat(${rows}, 36px)`;
+    sampleContainer.style.gridTemplateColumns = `repeat(${cols}, 48px)`;
+    sampleContainer.style.gridTemplateRows = `repeat(${rows}, 48px)`;
 
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -75,8 +206,8 @@ function buildPlayerGrid() {
     const cols = currentQuestion.cols;
     userGrid = [];
 
-    playerContainer.style.gridTemplateColumns = `repeat(${cols}, 36px)`;
-    playerContainer.style.gridTemplateRows = `repeat(${rows}, 36px)`;
+    playerContainer.style.gridTemplateColumns = `repeat(${cols}, 48px)`;
+    playerContainer.style.gridTemplateRows = `repeat(${rows}, 48px)`;
 
     for (let r = 0; r < rows; r++) {
         userGrid[r] = [];
@@ -89,6 +220,7 @@ function buildPlayerGrid() {
             userGrid[r][c] = null;
 
             cell.addEventListener('click', function () {
+                playSound('splash');
                 userGrid[r][c] = selectedColor;
                 cell.style.backgroundColor = selectedColor;
                 cell.classList.add('filled');
@@ -100,23 +232,10 @@ function buildPlayerGrid() {
     }
 }
 
-function clearPlayerGrid() {
-    const playerContainer = document.getElementById('player-grid');
-    const cells = playerContainer.querySelectorAll('.grid-cell');
-    cells.forEach(cell => {
-        cell.style.backgroundColor = '#FFFFFF';
-        cell.classList.remove('filled', 'correct', 'wrong');
-    });
-
-    for (let r = 0; r < currentQuestion.rows; r++) {
-        for (let c = 0; c < currentQuestion.cols; c++) {
-            userGrid[r][c] = null;
-        }
-    }
-    setFeedback('Grid reset. Keep going!');
-}
-
 function checkAnswer() {
+    if (hasSubmitted) return;
+    hasSubmitted = true;
+    playSound('click');
     const rows = currentQuestion.rows;
     const cols = currentQuestion.cols;
     let matched = 0;
@@ -140,31 +259,120 @@ function checkAnswer() {
         }
     }
 
-    const percentage = Math.round((matched / total) * 100);
-    gameStats.attempts++;
-
-    if (percentage > gameStats.bestScore) {
-        gameStats.bestScore = percentage;
+    const accuracy = Math.round((matched / total) * 100);
+    var timePenalty = 0;
+    if (timerSeconds > 120) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 30) * 5);
     }
+    var timeScore = 30 - timePenalty;
+    var score = Math.round((accuracy / 100) * 70 + timeScore);
+    score = Math.max(0, Math.min(100, score));
 
-    sessionStorage.setItem('artGameScore', String(Math.max(gameStats.bestScore, 0)));
+    stopTimer();
+    const timeTaken = timerSeconds;
+    sessionStorage.setItem('gameType', 'art');
+    sessionStorage.setItem('timeTaken', timeTaken.toString());
+    sessionStorage.setItem('accuracy', accuracy.toString());
+    sessionStorage.setItem('score', score.toString());
+    sessionStorage.setItem('artGameScore', score.toString());
+
+    var submitBtn = document.getElementById('check-btn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitted';
+    }
 
     if (matched === total) {
-        setFeedback(`Perfect! ${matched}/${total} cells correct. Score ${percentage}%. Click Next for new art.`);
+        playSound('success');
     } else {
-        setFeedback(`Almost there: ${matched}/${total} correct (${percentage}%). Fix the red cells or press Next.`);
+        playSound('failure');
     }
+    if (bgMusic) bgMusic.pause();
+    setFeedback(`Submitted: ${matched}/${total} correct. Accuracy ${accuracy}% | Score ${score}.`);
 
-    updateScoreboard();
+    setTimeout(function () {
+        window.location.href = 'results.html';
+    }, 1200);
 }
 
 function setFeedback(message) {
     document.getElementById('feedback').textContent = message;
 }
 
-function updateScoreboard() {
-    const scoreboard = document.getElementById('scoreboard');
-    scoreboard.textContent = `Challenge: ${currentQuestion.title} | Attempts: ${gameStats.attempts} | Best: ${gameStats.bestScore}%`;
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
 }
 
-document.addEventListener('DOMContentLoaded', initArtGame);
+function exitGame() {
+    playSound('click');
+    clearInterval(timerInterval);
+    if (bgMusic) bgMusic.pause();
+    if (tickSound) {
+        tickSound.pause();
+        tickSound.currentTime = 0;
+    }
+    window.location.href = 'index.html#job-select';
+}
+
+function showInstructions() {
+    playSound('click');
+    var modal = document.getElementById('instructions-modal');
+    if (modal) modal.classList.remove('hidden');
+}
+
+function hideInstructions() {
+    playSound('click');
+    var modal = document.getElementById('instructions-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function clearGrid() {
+    playSound('click');
+    if (hasSubmitted) return;
+    var rows = currentQuestion.rows;
+    var cols = currentQuestion.cols;
+    for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+            userGrid[r][c] = null;
+            var cellSelector = "[data-row='" + r + "'][data-col='" + c + "']";
+            var cell = document.querySelector('#player-grid ' + cellSelector);
+            if (cell) {
+                cell.style.backgroundColor = '#FFFFFF';
+                cell.classList.remove('filled', 'correct', 'wrong');
+            }
+        }
+    }
+}
+
+function playSound(name) {
+    try {
+        var pool = soundPool[name];
+        if (pool && pool.length > 0) {
+            var audio = null;
+            for (var i = 0; i < pool.length; i++) {
+                if (pool[i].paused || pool[i].ended) {
+                    audio = pool[i];
+                    break;
+                }
+            }
+            if (!audio) {
+                audio = pool[0];
+            }
+            audio.currentTime = 0;
+            audio.play().catch(function (err) {
+                console.error("Audio playback error for " + name + ":", err);
+            });
+        } else {
+            console.warn("Sound pool missing or empty for:", name);
+        }
+    } catch (e) {
+        console.error("playSound exception for " + name + ":", e);
+    }
+}
