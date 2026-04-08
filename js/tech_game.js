@@ -189,8 +189,8 @@ function submitCode() {
     var results = runCode();
     var accuracy = results.total > 0 ? (results.passed / results.total) * 100 : 0;
     var timePenalty = 0;
-    if (timerSeconds > 120) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 30) * 5);
+    if (timerSeconds > 300) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 300) / 30) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -239,6 +239,18 @@ function showInstructions() {
 function hideInstructions() {
     playSound('click');
     var modal = document.getElementById('instructions-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function showCheatSheet() {
+    playSound('click');
+    var modal = document.getElementById('cheatsheet-modal');
+    if (modal) modal.classList.remove('hidden');
+}
+
+function hideCheatSheet() {
+    playSound('click');
+    var modal = document.getElementById('cheatsheet-modal');
     if (modal) modal.classList.add('hidden');
 }
 

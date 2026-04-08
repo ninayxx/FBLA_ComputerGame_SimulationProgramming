@@ -367,8 +367,8 @@ function submitGame() {
         accuracy = 0;
     }
     var timePenalty = 0;
-    if (timerSeconds > 60) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 60) / 30) * 5);
+    if (timerSeconds > 180) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 180) / 30) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -417,6 +417,18 @@ function showInstructions() {
 function hideInstructions() {
     playSound('click');
     var modal = document.getElementById('instructions-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function showCheatSheet() {
+    playSound('click');
+    var modal = document.getElementById('cheatsheet-modal');
+    if (modal) modal.classList.remove('hidden');
+}
+
+function hideCheatSheet() {
+    playSound('click');
+    var modal = document.getElementById('cheatsheet-modal');
     if (modal) modal.classList.add('hidden');
 }
 

@@ -35,6 +35,8 @@
             <div class="circuit-board" id="circuit-board"></div>
 
             <div class="toolbox">
+                <img src="assets/images/items/eng-job-image.png" alt="Engineering"
+                    style="width: 80px; margin: 0 auto 6px; display: block; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));">
                 <h3>Toolbox — Drag a gate onto the circuit</h3>
                 <div class="gates">
                     <div class="gate" draggable="true" ondragstart="handleDragStart(event)" data-type="AND">AND</div>
@@ -46,6 +48,7 @@
 
             <div class="controls">
                 <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                <button class="control-btn info-btn" onclick="showCheatSheet()">📋 Gate Cheat Sheet</button>
                 <button class="control-btn" id="submit-btn" onclick="submitGame()">Submit</button>
                 <button class="control-btn hidden" id="next-level-btn" onclick="nextLevel()">New Problem &rarr;</button>
                 <button class="control-btn reset-btn" onclick="resetLevel()">Reset</button>
@@ -66,6 +69,63 @@
                     accuracy and speed!</li>
             </ul>
             <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="cheatsheet-modal">
+        <div class="modal-box" style="max-width: 550px;">
+            <h2>Logic Gate Cheat Sheet</h2>
+            <div style="text-align: left; font-size: 0.9rem; line-height: 1.6;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
+                    <thead>
+                        <tr style="background: #f0f0f0;">
+                            <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">Gate</th>
+                            <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">A=0, B=0</th>
+                            <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">A=0, B=1</th>
+                            <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">A=1, B=0</th>
+                            <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">A=1, B=1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; text-align: center;">AND</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; text-align: center;">OR</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; text-align: center;">XOR</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; text-align: center;">NAND</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2ecc71; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Quick Summary:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>AND</strong> — Output is 1 only when <em>both</em> inputs are 1</li>
+                    <li><strong>OR</strong> — Output is 1 when <em>at least one</em> input is 1</li>
+                    <li><strong>XOR</strong> — Output is 1 when inputs are <em>different</em></li>
+                    <li><strong>NAND</strong> — Opposite of AND (0 only when both are 1)</li>
+                </ul>
+            </div>
+            <button class="control-btn" onclick="hideCheatSheet()">Close</button>
         </div>
     </div>
 

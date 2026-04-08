@@ -31,10 +31,13 @@
     </div>
     <div class="game-container">
         <div class="problem-panel">
+            <img src="assets/images/items/tech-job-image.png" alt="Tech"
+                style="width: 80px; margin: 0 auto 6px; display: block; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));">
             <h2 id="problem-title" class="problem-title">Loading...</h2>
             <div id="problem-desc" class="problem-desc"></div>
             <div class="problem-panel-buttons">
                 <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                <button class="control-btn info-btn" onclick="showCheatSheet()">📋 JS Cheat Sheet</button>
             </div>
         </div>
         <div class="editor-panel">
@@ -59,6 +62,56 @@
                 <li>Use <strong>Tab</strong> to indent your code</li>
             </ul>
             <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="cheatsheet-modal">
+        <div class="modal-box" style="max-width: 620px;">
+            <h2>JavaScript Cheat Sheet</h2>
+            <div style="text-align: left; font-size: 0.85rem; line-height: 1.6;">
+                <p><strong>Variables:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">var x = 10;
+var name = "hello";
+var arr = [1, 2, 3];</pre>
+
+                <p><strong>If / Else:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">if (x > 5) {
+    return true;
+} else {
+    return false;
+}</pre>
+
+                <p><strong>For Loops:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">for (var i = 0; i < arr.length; i++) {
+    // do something with arr[i]
+}</pre>
+
+                <p><strong>Common String Methods:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">str.length
+str.toUpperCase()
+str.toLowerCase()
+str.split("")
+str.charAt(0)
+str.includes("abc")</pre>
+
+                <p><strong>Common Array Methods:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">arr.push(item)
+arr.pop()
+arr.length
+arr.indexOf(item)
+arr.reverse()
+arr.join("")
+arr.sort()</pre>
+
+                <p><strong>Math:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">Math.max(a, b)
+Math.min(a, b)
+Math.floor(x)
+Math.ceil(x)
+Math.abs(x)
+x % 2 === 0  // even check</pre>
+            </div>
+            <button class="control-btn" onclick="hideCheatSheet()">Close</button>
         </div>
     </div>
 

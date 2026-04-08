@@ -216,14 +216,14 @@ function beginFlashing() {
         void flashEl.offsetWidth;
         flashEl.classList.add('visible');
 
-        // After ~2.5s fade out, then show next after 0.5s gap
+        // After ~6.5s fade out, then show next after 0.5s gap
         setTimeout(function () {
             flashEl.classList.remove('visible');
             setTimeout(function () {
                 index++;
                 showNext();
             }, 500);
-        }, 2500);
+        }, 6500);
     }
 
     showNext();
@@ -258,8 +258,8 @@ function submitAnswer() {
     var accuracy = Math.max(0, Math.round(100 - errorPercent * 10));
 
     var timePenalty = 0;
-    if (timerSeconds > 60) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 60) / 30) * 5);
+    if (timerSeconds > 120) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 30) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);

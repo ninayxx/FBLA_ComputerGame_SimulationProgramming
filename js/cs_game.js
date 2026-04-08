@@ -415,8 +415,8 @@ function submitOrder() {
     var accuracy = 100; // All items in basket = perfect accuracy
 
     var timePenalty = 0;
-    if (timerSeconds > 60) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 60) / 30) * 5);
+    if (timerSeconds > 45) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 45) / 30) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
