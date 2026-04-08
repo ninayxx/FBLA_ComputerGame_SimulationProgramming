@@ -116,10 +116,12 @@ function renderAllStars() {
     var engScore = parseInt(sessionStorage.getItem('engGameScore') || '0');
     var artScore = parseInt(sessionStorage.getItem('artGameScore') || '0');
     var medicalScore = parseInt(sessionStorage.getItem('medicalGameScore') || '0');
+    var businessScore = parseInt(sessionStorage.getItem('businessGameScore') || '0');
     renderStarRating('tech-stars', techScore);
     renderStarRating('eng-stars', engScore);
     renderStarRating('art-stars', artScore);
     renderStarRating('medical-stars', medicalScore);
+    renderStarRating('business-stars', businessScore);
 }
 
 function renderStarRating(containerId, score) {

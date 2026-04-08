@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.setItem('techGameScore', score);
     } else if (gameType === 'art') {
         sessionStorage.setItem('artGameScore', score);
+    } else if (gameType === 'business') {
+        sessionStorage.setItem('businessGameScore', score);
     }
 
     playResultSound(score);

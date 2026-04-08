@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quest - Business Game</title>
+    <link rel="stylesheet" href="css/bus_game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="intro-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: black; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="letterbox-bar" style="width: 100%; height: 12%; background: black; flex-shrink: 0;"></div>
+        <video id="intro-video" src="assets/videos/bus-game.mp4" style="width: 100%; flex: 1; object-fit: cover;"
+            playsinline></video>
+        <div class="letterbox-bar" style="width: 100%; height: 12%; background: black; flex-shrink: 0;"></div>
+        <button id="play-intro-btn"
+            style="position: absolute; z-index: 10001; padding: 20px 40px; font-family: 'Press Start 2P', monospace; font-size: 20px; background: rgba(76, 175, 80, 0.9); color: white; border: none; border-radius: 8px; cursor: pointer;">▶
+            PLAY</button>
+        <button id="skip-intro"
+            style="position: absolute; bottom: 50px; right: 30px; padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 12px; background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white; border-radius: 4px; cursor: pointer; z-index: 10000;">SKIP
+            >></button>
+    </div>
+
+    <div class="game-topbar">
+        <button class="topbar-btn exit-btn" onclick="exitGame()">✕ Exit</button>
+        <div class="stopwatch" id="stopwatch">00:00</div>
+    </div>
+
+    <main class="game-container bus-game-main">
+        <section class="panel side-panel">
+            <section class="panel-inner">
+                <h2>Business Ledger</h2>
+                <img src="assets/images/items/business-job-image.png" alt="Business Logo"
+                     style="width: 120px; margin: 10px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
+                <div class="rules-box">
+                    <p><strong>Rules:</strong></p>
+                    <ul style="padding-left: 20px; margin: 10px 0; font-size: 0.85rem; color: #444; line-height: 1.6;">
+                        <li>Watch the monitor carefully.</li>
+                        <li>Maintain a running total in your head.</li>
+                        <li>No calculators allowed!</li>
+                    </ul>
+                </div>
+                <div class="flash-legend-vertical">
+                    <div class="legend-item"><span class="legend-dot green"></span> Amount to Add</div>
+                    <div class="legend-item"><span class="legend-dot red"></span> Amount to Subtract</div>
+                    <div class="legend-item"><span class="legend-dot yellow"></span> Apply Interest Rate</div>
+                </div>
+            </section>
+        </section>
+
+        <section class="panel display-panel">
+            <section class="panel-inner monitor-screen">
+                <div class="flash-area" id="flash-area">
+                    <div class="flash-number" id="flash-number"></div>
+                    <div class="flash-progress" id="flash-progress" style="background: transparent; border: none; color: #555; font-weight: bold;">Ready?</div>
+                </div>
+
+                <div class="input-area" id="input-area">
+                    <div class="input-label" style="color: #333; font-weight: bold;">What is the final amount?</div>
+                    <div class="input-row">
+                        <span class="dollar-prefix" style="color: #333;">$</span>
+                        <input type="number" step="0.01" class="answer-input" id="answer-input"
+                            placeholder="Enter your answer">
+                    </div>
+                    <div class="controls">
+                        <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                        <button id="submit-btn" class="control-btn submit-btn" onclick="submitAnswer()">Submit</button>
+                    </div>
+                    <div id="feedback" class="feedback" style="color: #333;"></div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- How to Play Modal -->
+    <div class="modal-overlay hidden" id="instructions-modal">
+        <div class="modal-box">
+            <h2>How to Play - Business Challenge</h2>
+            <ul>
+                <li>Numbers will flash on screen one at a time (~3 seconds each)</li>
+                <li><strong style="color:#2ecc71;">Green numbers</strong> are amounts to <strong>add</strong></li>
+                <li><strong style="color:#e74c3c;">Red numbers</strong> are amounts to <strong>subtract</strong></li>
+                <li><strong style="color:#f1c40f;">Yellow percentages</strong> are <strong>interest rates</strong> —
+                    multiply your running total by (1 + rate)</li>
+                <li>After all numbers flash, type the <strong>final amount</strong> and click Submit</li>
+                <li>Your score is based on accuracy (70%) and speed (30%)</li>
+            </ul>
+            <button class="control-btn" onclick="hideInstructions()">Got it!</button>
+        </div>
+    </div>
+
+    <script src="js/bus_questions.js"></script>
+    <script src="js/bus_game.js"></script>
+</body>
+
+</html>
