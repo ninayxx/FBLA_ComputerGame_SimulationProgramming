@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.setItem('artGameScore', score);
     } else if (gameType === 'business') {
         sessionStorage.setItem('businessGameScore', score);
+    } else if (gameType === 'customer-service') {
+        sessionStorage.setItem('customerServiceGameScore', score);
     }
 
     playResultSound(score);

@@ -117,11 +117,13 @@ function renderAllStars() {
     var artScore = parseInt(sessionStorage.getItem('artGameScore') || '0');
     var medicalScore = parseInt(sessionStorage.getItem('medicalGameScore') || '0');
     var businessScore = parseInt(sessionStorage.getItem('businessGameScore') || '0');
+    var csScore = parseInt(sessionStorage.getItem('customerServiceGameScore') || '0');
     renderStarRating('tech-stars', techScore);
     renderStarRating('eng-stars', engScore);
     renderStarRating('art-stars', artScore);
     renderStarRating('medical-stars', medicalScore);
     renderStarRating('business-stars', businessScore);
+    renderStarRating('customer-service-stars', csScore);
 }
 
 function renderStarRating(containerId, score) {
