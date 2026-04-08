@@ -261,8 +261,8 @@ function checkAnswer() {
 
     const accuracy = Math.round((matched / total) * 100);
     var timePenalty = 0;
-    if (timerSeconds > 120) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 30) * 5);
+    if (timerSeconds > 30) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 30) / 30) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
