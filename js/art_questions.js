@@ -1,4 +1,3 @@
-// Art question bank and randomizer for Color-in Art Game
 const artQuestions = [
     {
         id: 1,

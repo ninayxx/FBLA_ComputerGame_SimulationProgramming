@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     playIntro();
 });
 
-/* ────────────────────────────────────────────────────────
-   Intro video
-   ──────────────────────────────────────────────────────── */
 
 function playIntro() {
     var overlay = document.getElementById('intro-overlay');
@@ -62,7 +59,6 @@ function playIntro() {
     if (skipBtn) skipBtn.addEventListener('click', function () { playSound('click'); stopIntro(); });
     if (playBtn) playBtn.addEventListener('click', function () { playSound('click'); startPlayback(); });
 
-    // If the intro video asset is missing, continue into gameplay automatically.
     setTimeout(function () {
         if (!introFinished && (video.error || video.networkState === video.NETWORK_NO_SOURCE)) {
             stopIntro();
@@ -70,9 +66,6 @@ function playIntro() {
     }, 1200);
 }
 
-/* ────────────────────────────────────────────────────────
-   Game start
-   ──────────────────────────────────────────────────────── */
 
 function startGame() {
     startTimer();
@@ -80,9 +73,6 @@ function startGame() {
     showInstructions();
 }
 
-/* ────────────────────────────────────────────────────────
-   Sound helpers
-   ──────────────────────────────────────────────────────── */
 
 function preloadSounds() {
     var names = ['click', 'drop', 'success', 'failure'];
@@ -133,9 +123,6 @@ function playSound(name) {
     } catch (e) { }
 }
 
-/* ────────────────────────────────────────────────────────
-   Timer
-   ──────────────────────────────────────────────────────── */
 
 function startTimer() {
     timerSeconds = 0;
@@ -173,9 +160,6 @@ function stopTimer() {
     }
 }
 
-/* ────────────────────────────────────────────────────────
-   Flashing sequence
-   ──────────────────────────────────────────────────────── */
 
 function beginFlashing() {
     currentRound = generateBusinessRound();
@@ -184,14 +168,12 @@ function beginFlashing() {
     var progressEl = document.getElementById('flash-progress');
     var inputArea = document.getElementById('input-area');
 
-    // Hide the input area during flashing
     inputArea.classList.remove('visible');
 
     var index = 0;
 
     function showNext() {
         if (index >= items.length) {
-            // Flashing done — show input
             flashEl.textContent = '';
             flashEl.className = 'flash-number';
             progressEl.textContent = 'Done! Enter your answer below.';
@@ -203,20 +185,16 @@ function beginFlashing() {
         var item = items[index];
         progressEl.textContent = 'Number ' + (index + 1) + ' of ' + items.length;
 
-        // Set colour class
         var colorClass = 'flash-add';
         if (item.type === 'subtract') colorClass = 'flash-subtract';
         if (item.type === 'interest') colorClass = 'flash-interest';
 
-        // Animate in
         flashEl.className = 'flash-number ' + colorClass;
         flashEl.textContent = item.display;
 
-        // Force reflow, then add visible class for the transition
         void flashEl.offsetWidth;
         flashEl.classList.add('visible');
 
-        // After ~6.5s fade out, then show next after 0.5s gap
         setTimeout(function () {
             flashEl.classList.remove('visible');
             setTimeout(function () {
@@ -229,9 +207,6 @@ function beginFlashing() {
     showNext();
 }
 
-/* ────────────────────────────────────────────────────────
-   Submit answer
-   ──────────────────────────────────────────────────────── */
 
 function submitAnswer() {
     if (hasSubmitted) return;
@@ -254,12 +229,11 @@ function submitAnswer() {
         errorPercent = userAnswer === 0 ? 0 : 100;
     }
 
-    // Accuracy: 100% if exact, decreasing by 10 per 1% error, min 0
     var accuracy = Math.max(0, Math.round(100 - errorPercent * 10));
 
     var timePenalty = 0;
     if (timerSeconds > 120) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 30) * 5);
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 20) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -297,9 +271,6 @@ function submitAnswer() {
     }, 2000);
 }
 
-/* ────────────────────────────────────────────────────────
-   UI helpers
-   ──────────────────────────────────────────────────────── */
 
 function exitGame() {
     playSound('click');
@@ -323,7 +294,6 @@ function hideInstructions() {
     var modal = document.getElementById('instructions-modal');
     if (modal) modal.classList.add('hidden');
 
-    // Start flashing after closing the instructions (first time only)
     if (!currentRound && !hasSubmitted) {
         beginFlashing();
     }

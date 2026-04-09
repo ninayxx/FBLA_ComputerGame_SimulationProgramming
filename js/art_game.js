@@ -62,7 +62,6 @@ function playIntro() {
     if (skipBtn) skipBtn.addEventListener('click', function () { playSound('click'); stopIntro(); });
     if (playBtn) playBtn.addEventListener('click', function () { playSound('click'); startPlayback(); });
 
-    // If the intro video asset is missing, continue into gameplay automatically.
     setTimeout(function () {
         if (!introFinished && (video.error || video.networkState === video.NETWORK_NO_SOURCE)) {
             stopIntro();
@@ -262,7 +261,7 @@ function checkAnswer() {
     const accuracy = Math.round((matched / total) * 100);
     var timePenalty = 0;
     if (timerSeconds > 30) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 30) / 30) * 5);
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 30) / 5) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);

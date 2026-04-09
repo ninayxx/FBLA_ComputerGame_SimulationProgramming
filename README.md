@@ -10,7 +10,7 @@ Every mini-game calculates a final score out of 100 points, which rewards player
 
 The final score consists of two components across all games:
 - **Accuracy (70 points max):** Game-specific metric evaluating how correctly the player completed the task.
-- **Speed (30 points max):** A time-based component. Each mini-game has a different "grace period" calibrated to its subjective difficulty. Once the timer exceeds the grace period, a 5-point deduction is applied for every 30 seconds over the limit (down to a minimum of 0 speed points).
+- **Speed (30 points max):** A time-based component. Each mini-game has a different "grace period" calibrated to its subjective difficulty. Once the timer exceeds the grace period, a 5-point deduction is applied at proportionally scaled intervals based on the game's grace period (down to a minimum of 0 speed points).
 
 ---
 

@@ -193,10 +193,27 @@ img {
     display: flex;
     justify-content: center;
     gap: 4px;
-    margin-top: -10px;
+    margin-top: -40px;
     height: 70px;
     position: relative;
     z-index: 2;
+}
+
+#tech-stars {
+    margin-top: -65px;
+}
+
+#art-stars {
+    margin-top: -80px;
+}
+
+#medical-stars,
+#business-stars {
+    margin-top: -15px;
+}
+
+#customer-service-stars {
+    margin-top: -50px;
 }
 
 .star-wrapper {

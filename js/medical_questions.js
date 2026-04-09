@@ -1,4 +1,3 @@
-// Disease Reference — lists diseases and their symptoms
 var diseaseReference = [
     {
         disease: 'Common Cold',
@@ -26,7 +25,6 @@ var diseaseReference = [
     }
 ];
 
-// Pill Guide — lists pills and the diseases they treat
 var pillGuide = [
     {
         pill: 'ColdAway',
@@ -66,7 +64,6 @@ var pillGuide = [
     }
 ];
 
-// Patient scenarios
 var medicalQuestions = [
     {
         patientName: 'Sarah Mitchell',

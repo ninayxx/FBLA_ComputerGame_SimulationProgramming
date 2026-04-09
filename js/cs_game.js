@@ -8,7 +8,6 @@ var soundPool = {};
 var hasSubmitted = false;
 var introAudios = [];
 
-/* ── Grocery catalogue ─────────────────────────────── */
 
 var groceryItems = [
     { emoji: '🍎', name: 'Apple' },
@@ -43,9 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     playIntro();
 });
 
-/* ────────────────────────────────────────────────────────
-   Intro video
-   ──────────────────────────────────────────────────────── */
 
 function playIntro() {
     var overlay = document.getElementById('intro-overlay');
@@ -100,9 +96,6 @@ function playIntro() {
     }, 1200);
 }
 
-/* ────────────────────────────────────────────────────────
-   Game start
-   ──────────────────────────────────────────────────────── */
 
 function startGame() {
     startTimer();
@@ -112,9 +105,6 @@ function startGame() {
     showInstructions();
 }
 
-/* ────────────────────────────────────────────────────────
-   Sound helpers
-   ──────────────────────────────────────────────────────── */
 
 function preloadSounds() {
     var names = ['click', 'drop', 'success', 'failure'];
@@ -165,9 +155,6 @@ function playSound(name) {
     } catch (e) { }
 }
 
-/* ────────────────────────────────────────────────────────
-   Timer
-   ──────────────────────────────────────────────────────── */
 
 function startTimer() {
     timerSeconds = 0;
@@ -205,15 +192,11 @@ function stopTimer() {
     }
 }
 
-/* ────────────────────────────────────────────────────────
-   Build shelf — pick TOTAL_ITEMS random groceries
-   ──────────────────────────────────────────────────────── */
 
 function buildShelf() {
     var shelf = document.getElementById('items-shelf');
     shelf.innerHTML = '';
 
-    // Pick random items
     var pool = groceryItems.slice();
     for (var i = pool.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -249,7 +232,6 @@ function createGroceryCard(item, index) {
     card.appendChild(emoji);
     card.appendChild(name);
 
-    // Drag events
     card.addEventListener('dragstart', function (e) {
         card.classList.add('dragging');
         e.dataTransfer.setData('text/plain', index.toString());
@@ -260,7 +242,6 @@ function createGroceryCard(item, index) {
         card.classList.remove('dragging');
     });
 
-    // Touch support
     card.addEventListener('touchstart', handleTouchStart, { passive: false });
     card.addEventListener('touchmove', handleTouchMove, { passive: false });
     card.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -268,9 +249,6 @@ function createGroceryCard(item, index) {
     return card;
 }
 
-/* ────────────────────────────────────────────────────────
-   Touch drag support
-   ──────────────────────────────────────────────────────── */
 
 var touchDragEl = null;
 var touchOffsetX = 0;
@@ -289,7 +267,6 @@ function handleTouchStart(e) {
     touchOffsetX = touch.clientX - rect.left;
     touchOffsetY = touch.clientY - rect.top;
 
-    // Create a floating clone
     touchClone = card.cloneNode(true);
     touchClone.style.position = 'fixed';
     touchClone.style.zIndex = '9000';
@@ -311,7 +288,6 @@ function handleTouchMove(e) {
     touchClone.style.left = (touch.clientX - touchOffsetX) + 'px';
     touchClone.style.top = (touch.clientY - touchOffsetY) + 'px';
 
-    // Highlight basket zone
     var basket = document.getElementById('basket-zone');
     var basketRect = basket.getBoundingClientRect();
     if (touch.clientX >= basketRect.left && touch.clientX <= basketRect.right &&
@@ -344,9 +320,6 @@ function handleTouchEnd(e) {
     touchClone = null;
 }
 
-/* ────────────────────────────────────────────────────────
-   Basket drop zone
-   ──────────────────────────────────────────────────────── */
 
 function setupBasketDropZone() {
     var basket = document.getElementById('basket-zone');
@@ -380,7 +353,6 @@ function moveToBasket(card) {
 
     playSound('drop');
 
-    // Remove from shelf, add to basket
     var basket = document.getElementById('basket-zone');
     var hint = basket.querySelector('.basket-hint');
     if (hint) hint.style.display = 'none';
@@ -393,15 +365,11 @@ function moveToBasket(card) {
     basketCount++;
     document.getElementById('basket-count').textContent = basketCount;
 
-    // Enable submit when all items are in basket
     if (basketCount >= TOTAL_ITEMS) {
         document.getElementById('submit-btn').disabled = false;
     }
 }
 
-/* ────────────────────────────────────────────────────────
-   Submit
-   ──────────────────────────────────────────────────────── */
 
 function submitOrder() {
     if (hasSubmitted) return;
@@ -412,11 +380,11 @@ function submitOrder() {
     hasSubmitted = true;
     playSound('click');
 
-    var accuracy = 100; // All items in basket = perfect accuracy
+    var accuracy = 100;
 
     var timePenalty = 0;
     if (timerSeconds > 15) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 15) / 30) * 5);
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 15) / 3) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -447,9 +415,6 @@ function submitOrder() {
     }, 2000);
 }
 
-/* ────────────────────────────────────────────────────────
-   UI helpers
-   ──────────────────────────────────────────────────────── */
 
 function exitGame() {
     playSound('click');

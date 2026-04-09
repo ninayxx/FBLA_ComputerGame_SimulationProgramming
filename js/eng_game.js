@@ -368,7 +368,7 @@ function submitGame() {
     }
     var timePenalty = 0;
     if (timerSeconds > 90) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 90) / 30) * 5);
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 90) / 15) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);

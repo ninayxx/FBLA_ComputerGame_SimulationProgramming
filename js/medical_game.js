@@ -59,7 +59,6 @@ function playIntro() {
     if (skipBtn) skipBtn.addEventListener('click', function () { playSound('click'); stopIntro(); });
     if (playBtn) playBtn.addEventListener('click', function () { playSound('click'); startPlayback(); });
 
-    // If the intro video asset is missing, continue into gameplay automatically.
     setTimeout(function () {
         if (!introFinished && (video.error || video.networkState === video.NETWORK_NO_SOURCE)) {
             stopIntro();
@@ -141,11 +140,9 @@ function loadPatient() {
         submitBtn.textContent = 'Submit';
     }
 
-    // Render patient info
     document.getElementById('patient-name').textContent = currentQuestion.patientName;
     document.getElementById('patient-age').textContent = 'Age: ' + currentQuestion.age;
 
-    // Render symptoms
     var symptomList = document.getElementById('symptom-list');
     symptomList.innerHTML = '';
     currentQuestion.symptoms.forEach(function (symptom) {
@@ -155,7 +152,6 @@ function loadPatient() {
         symptomList.appendChild(li);
     });
 
-    // Render pill choices (shuffled)
     var pillGrid = document.getElementById('pill-grid');
     pillGrid.innerHTML = '';
     var shuffledPills = shuffleArray(pillGuide.slice());
@@ -203,7 +199,6 @@ function submitDiagnosis() {
     var isCorrect = selectedPill === currentQuestion.correctPill;
     var accuracy = isCorrect ? 100 : 0;
 
-    // Visual feedback on pills
     document.querySelectorAll('.pill-card').forEach(function (card) {
         if (card.dataset.pill === currentQuestion.correctPill) {
             card.classList.add('correct');
@@ -214,7 +209,7 @@ function submitDiagnosis() {
 
     var timePenalty = 0;
     if (timerSeconds > 30) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 30) / 30) * 5);
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 30) / 5) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -252,7 +247,6 @@ function submitDiagnosis() {
 }
 
 function buildReferenceModals() {
-    // Disease Reference
     var diseaseContent = document.getElementById('disease-ref-content');
     diseaseContent.innerHTML = '';
     diseaseReference.forEach(function (d) {
@@ -264,7 +258,6 @@ function buildReferenceModals() {
         diseaseContent.appendChild(card);
     });
 
-    // Pill Guide
     var pillContent = document.getElementById('pill-guide-content');
     pillContent.innerHTML = '';
     pillGuide.forEach(function (p) {
