@@ -40,6 +40,7 @@ var groceryItems = [
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
     playIntro();
+    setupModalClickOutside();
 });
 
 
@@ -437,4 +438,16 @@ function hideInstructions() {
     playSound('click');
     var modal = document.getElementById('instructions-modal');
     if (modal) modal.classList.add('hidden');
+}
+
+function setupModalClickOutside() {
+    var overlay = document.getElementById('instructions-modal');
+    if (overlay) {
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) {
+                overlay.classList.add('hidden');
+                playSound('click');
+            }
+        });
+    }
 }

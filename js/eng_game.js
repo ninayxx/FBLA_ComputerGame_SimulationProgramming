@@ -14,6 +14,7 @@ var introAudios = [];
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
     playIntro();
+    setupModalClickOutside();
 });
 
 function playIntro() {
@@ -259,6 +260,88 @@ function toggleInput(index) {
     evaluateCircuit();
 }
 
+// --- Touch drag variables for mobile gates ---
+var touchGateDrag = null;
+var touchGateClone = null;
+var touchGateType = null;
+var touchGateOffsetX = 0;
+var touchGateOffsetY = 0;
+
+function initGateTouchHandlers() {
+    document.querySelectorAll('.gate').forEach(function (gateEl) {
+        gateEl.addEventListener('touchstart', handleGateTouchStart, { passive: false });
+        gateEl.addEventListener('touchmove', handleGateTouchMove, { passive: false });
+        gateEl.addEventListener('touchend', handleGateTouchEnd, { passive: false });
+    });
+}
+
+function handleGateTouchStart(e) {
+    e.preventDefault();
+    var gateEl = e.currentTarget;
+    touchGateType = gateEl.dataset.type;
+    touchGateDrag = gateEl;
+    var touch = e.touches[0];
+    var rect = gateEl.getBoundingClientRect();
+    touchGateOffsetX = touch.clientX - rect.left;
+    touchGateOffsetY = touch.clientY - rect.top;
+
+    touchGateClone = gateEl.cloneNode(true);
+    touchGateClone.style.position = 'fixed';
+    touchGateClone.style.zIndex = '9999';
+    touchGateClone.style.pointerEvents = 'none';
+    touchGateClone.style.opacity = '0.85';
+    touchGateClone.style.width = rect.width + 'px';
+    touchGateClone.style.height = rect.height + 'px';
+    touchGateClone.style.left = (touch.clientX - touchGateOffsetX) + 'px';
+    touchGateClone.style.top = (touch.clientY - touchGateOffsetY) + 'px';
+    document.body.appendChild(touchGateClone);
+    gateEl.style.opacity = '0.4';
+}
+
+function handleGateTouchMove(e) {
+    if (!touchGateClone) return;
+    e.preventDefault();
+    var touch = e.touches[0];
+    touchGateClone.style.left = (touch.clientX - touchGateOffsetX) + 'px';
+    touchGateClone.style.top = (touch.clientY - touchGateOffsetY) + 'px';
+
+    document.querySelectorAll('.gate-slot').forEach(function (slot) {
+        var r = slot.getBoundingClientRect();
+        if (touch.clientX >= r.left && touch.clientX <= r.right &&
+            touch.clientY >= r.top && touch.clientY <= r.bottom) {
+            slot.classList.add('drag-over');
+        } else {
+            slot.classList.remove('drag-over');
+        }
+    });
+}
+
+function handleGateTouchEnd(e) {
+    if (!touchGateDrag) return;
+    e.preventDefault();
+    var touch = e.changedTouches[0];
+    if (touchGateDrag) touchGateDrag.style.opacity = '';
+    if (touchGateClone && touchGateClone.parentNode) {
+        touchGateClone.parentNode.removeChild(touchGateClone);
+    }
+    touchGateClone = null;
+
+    document.querySelectorAll('.gate-slot').forEach(function (slot) {
+        slot.classList.remove('drag-over');
+        var r = slot.getBoundingClientRect();
+        if (touch.clientX >= r.left && touch.clientX <= r.right &&
+            touch.clientY >= r.top && touch.clientY <= r.bottom) {
+            var slotId = slot.dataset.id;
+            gateState[slotId] = touchGateType;
+            slot.innerHTML = '<div class="gate-filled" data-type="' + touchGateType + '">' + touchGateType + '</div>';
+            playSound('drop');
+            evaluateCircuit();
+        }
+    });
+    touchGateDrag = null;
+    touchGateType = null;
+}
+
 function handleDragStart(e) {
     e.dataTransfer.setData("type", e.target.dataset.type);
 }
@@ -432,6 +515,20 @@ function hideCheatSheet() {
     if (modal) modal.classList.add('hidden');
 }
 
+function setupModalClickOutside() {
+    ['instructions-modal', 'cheatsheet-modal'].forEach(function (id) {
+        var overlay = document.getElementById(id);
+        if (overlay) {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) {
+                    overlay.classList.add('hidden');
+                    playSound('click');
+                }
+            });
+        }
+    });
+}
+
 function playSound(name) {
     try {
         var pool = soundPool[name];
@@ -453,3 +550,9 @@ function playSound(name) {
 }
 
 window.onresize = drawWires;
+
+// Initialize touch handlers for toolbox gates after DOM is ready.
+document.addEventListener('DOMContentLoaded', function () {
+    // Reinitialise touch handlers every time a level loads (gates are static in toolbox).
+    initGateTouchHandlers();
+});

@@ -10,6 +10,7 @@ var introAudios = [];
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
     playIntro();
+    setupModalClickOutside();
 });
 
 
@@ -296,5 +297,20 @@ function hideInstructions() {
 
     if (!currentRound && !hasSubmitted) {
         beginFlashing();
+    }
+}
+
+function setupModalClickOutside() {
+    var overlay = document.getElementById('instructions-modal');
+    if (overlay) {
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) {
+                overlay.classList.add('hidden');
+                playSound('click');
+                if (!currentRound && !hasSubmitted) {
+                    beginFlashing();
+                }
+            }
+        });
     }
 }

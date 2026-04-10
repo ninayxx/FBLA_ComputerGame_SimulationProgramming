@@ -10,6 +10,7 @@ var introAudios = [];
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
     playIntro();
+    setupModalClickOutside();
 });
 
 function playIntro() {
@@ -252,6 +253,20 @@ function hideCheatSheet() {
     playSound('click');
     var modal = document.getElementById('cheatsheet-modal');
     if (modal) modal.classList.add('hidden');
+}
+
+function setupModalClickOutside() {
+    ['instructions-modal', 'cheatsheet-modal'].forEach(function (id) {
+        var overlay = document.getElementById(id);
+        if (overlay) {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) {
+                    overlay.classList.add('hidden');
+                    playSound('click');
+                }
+            });
+        }
+    });
 }
 
 function playSound(name) {

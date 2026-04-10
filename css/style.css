@@ -128,14 +128,15 @@ img {
 
 .instruction-content {
     text-align: left;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.7;
 }
 
 .instruction-content p {
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
     font-weight: normal;
+    line-height: 1.7;
 }
 
 .instruction-content ul {
@@ -144,8 +145,8 @@ img {
 }
 
 .instruction-content li {
-    margin-bottom: 6px;
-    font-size: 1rem;
+    margin-bottom: 8px;
+    font-size: 1.15rem;
 }
 
 #instructions-modal.show-modal {
@@ -265,4 +266,40 @@ img {
     pointer-events: none;
     transition: opacity 0.5s ease-in-out;
     z-index: 9999;
+}
+
+/* --- Mobile job-hub improvements --- */
+@media (max-width: 768px) {
+    .job-card {
+        width: 200px;
+    }
+
+    .job-card img {
+        height: 30vmin;
+    }
+
+    .large-job-btn img {
+        height: 18vmin;
+    }
+
+    .back-home-btn {
+        font-size: 0.85rem;
+        padding: 12px 18px;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .job-card {
+        width: 150px;
+    }
+
+    .job-card img {
+        height: 25vmin;
+    }
+
+    .large-job-btn img {
+        height: 15vmin;
+    }
 }

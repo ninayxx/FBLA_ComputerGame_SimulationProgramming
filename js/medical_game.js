@@ -11,6 +11,7 @@ var introAudios = [];
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
     playIntro();
+    setupModalClickOutside();
 });
 
 function playIntro() {
@@ -338,6 +339,20 @@ function hidePillGuide() {
     playSound('click');
     var modal = document.getElementById('pill-guide-modal');
     if (modal) modal.classList.add('hidden');
+}
+
+function setupModalClickOutside() {
+    ['instructions-modal', 'disease-ref-modal', 'pill-guide-modal'].forEach(function (id) {
+        var overlay = document.getElementById(id);
+        if (overlay) {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) {
+                    overlay.classList.add('hidden');
+                    playSound('click');
+                }
+            });
+        }
+    });
 }
 
 function playSound(name) {

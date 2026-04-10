@@ -352,11 +352,17 @@ body {
     text-align: center;
 }
 
+.modal-box li {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
 .modal-box ul {
     text-align: left;
     padding-left: 20px;
     line-height: 1.8;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
 }
 
 .modal-box strong {

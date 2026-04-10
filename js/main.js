@@ -203,3 +203,16 @@ function playSound(name) {
         }
     } catch (e) { }
 }
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('instructions-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show-modal');
+                playSound('click');
+            }
+        });
+    }
+});
