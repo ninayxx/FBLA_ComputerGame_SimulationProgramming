@@ -256,7 +256,6 @@ body {
     margin-left: 6px;
 }
 
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -322,7 +321,6 @@ body {
     color: #4e4e4e;
 }
 
-/* Letterbox bars for intro */
 .letterbox-bar {
     background: black;
 }

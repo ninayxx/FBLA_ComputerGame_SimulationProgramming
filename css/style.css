@@ -268,7 +268,6 @@ img {
     z-index: 9999;
 }
 
-/* --- Mobile job-hub improvements --- */
 @media (max-width: 768px) {
     .job-card {
         width: 200px;

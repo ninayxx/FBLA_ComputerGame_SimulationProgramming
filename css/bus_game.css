@@ -20,7 +20,6 @@ body {
     overflow: auto;
 }
 
-/* ── Top bar ────────────────────────────────────────── */
 
 .game-topbar {
     position: fixed;
@@ -62,7 +61,6 @@ body {
     border: 2px solid #525252;
 }
 
-/* ── Main game container ───────────────────────────── */
 
 .bus-game-main {
     width: 94%;
@@ -141,7 +139,6 @@ body {
     margin-top: 10px;
 }
 
-/* ── Flash display area ────────────────────────────── */
 
 .flash-area {
     flex: 1;
@@ -173,7 +170,6 @@ body {
     transform: scale(1);
 }
 
-/* colour classes */
 .flash-add {
     color: #2ecc71;
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
@@ -189,7 +185,6 @@ body {
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ── Progress indicator ────────────────────────────── */
 
 .flash-progress {
     font-family: 'Press Start 2P', system-ui;
@@ -202,7 +197,6 @@ body {
     border: 1px solid #ccc;
 }
 
-/* ── Legend ─────────────────────────────────────────── */
 
 .flash-legend-vertical {
     display: flex;
@@ -242,7 +236,6 @@ body {
     background: #f1c40f;
 }
 
-/* ── Input area ────────────────────────────────────── */
 
 .input-area {
     display: none;
@@ -307,7 +300,6 @@ body {
     box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
 }
 
-/* ── Controls & buttons ────────────────────────────── */
 
 .controls {
     display: flex;
@@ -365,7 +357,6 @@ body {
     color: #252525;
 }
 
-/* ── Modal Styles ──────────────────────────────────── */
 
 .modal-overlay {
     position: fixed;
@@ -434,7 +425,6 @@ body {
     background: black;
 }
 
-/* ── Countdown overlay ─────────────────────────────── */
 
 .countdown-overlay {
     position: absolute;
@@ -469,7 +459,6 @@ body {
     }
 }
 
-/* ── Responsive ────────────────────────────────────── */
 
 @media (max-width: 600px) {
     .flash-number {

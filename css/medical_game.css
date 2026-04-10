@@ -121,7 +121,6 @@ body {
     color: #444;
 }
 
-/* Patient info */
 .patient-info {
     background: #f9f0f0;
     border: 2px solid #e0c8c8;
@@ -181,7 +180,6 @@ body {
     background-color: #e8e8e8;
 }
 
-/* Pill grid */
 .diagnosis-prompt {
     font-size: 0.9rem;
     color: #555;
@@ -252,7 +250,6 @@ body {
     line-height: 1.3;
 }
 
-/* Controls & buttons */
 .controls {
     display: flex;
     gap: 10px;
@@ -309,7 +306,6 @@ body {
     color: #252525;
 }
 
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -373,7 +369,6 @@ body {
     margin-top: 15px;
 }
 
-/* Reference modal content */
 .ref-content {
     display: flex;
     flex-direction: column;

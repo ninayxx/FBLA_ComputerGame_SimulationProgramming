@@ -260,7 +260,6 @@ function toggleInput(index) {
     evaluateCircuit();
 }
 
-// --- Touch drag variables for mobile gates ---
 var touchGateDrag = null;
 var touchGateClone = null;
 var touchGateType = null;
@@ -551,8 +550,6 @@ function playSound(name) {
 
 window.onresize = drawWires;
 
-// Initialize touch handlers for toolbox gates after DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-    // Reinitialise touch handlers every time a level loads (gates are static in toolbox).
     initGateTouchHandlers();
 });
