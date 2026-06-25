@@ -1,10 +1,12 @@
+html { font-size: 115%; }
+
 @font-face {
-    font-family: 'cs-buckle-drawn';
-    src: url('../assets/fonts/CsbuckledrawnRegularDemo-Wplzv.otf') format('opentype');
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'cs-areno-pixel';
+    font-family: 'CsArenoPixel';
     src: url('../assets/fonts/CsArenoPixelRegularDemo-7Oz9D.otf') format('opentype');
 }
 
@@ -14,7 +16,7 @@
 
 body {
     background-color: #e1e3ed;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,7 +72,7 @@ p {
     font-weight: bold;
 }
 
-button {
+button   {
     background-color: #ffe2e2;
     border: 2px solid #414141;
     border-radius: 5px;
@@ -78,13 +80,13 @@ button {
     padding: 15px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
-    font-size: 1.2rem;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-size: 1.20rem;
+    font-family: 'SimpleMinimalist', sans-serif;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
 
-button:hover {
+button:hover   {
     transform: scale(1.05);
 }
 
@@ -124,7 +126,7 @@ img {
 
 #instructions-container h1 {
     margin: 0 0 10px 0;
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1.2rem;
 }
 
@@ -188,7 +190,7 @@ img {
     pointer-events: none;
 }
 
-.large-job-btn img {
+.large-job-btn img   {
     height: 22vmin;
 }
 
@@ -243,7 +245,7 @@ img {
     clip-path: inset(0 var(--clip-right, 100%) 0 0);
 }
 
-.back-home-btn {
+.back-home-btn   {
     position: absolute;
     bottom: 15px;
     right: 15px;
@@ -251,9 +253,9 @@ img {
     border: 2px solid #414141;
     border-radius: 8px;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 1.00rem;
     cursor: pointer;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     z-index: 10;
 }
 
@@ -279,11 +281,11 @@ img {
         height: 30vmin;
     }
 
-    .large-job-btn img {
+    .large-job-btn img   {
         height: 18vmin;
     }
 
-    .back-home-btn {
+    .back-home-btn   {
         font-size: 0.85rem;
         padding: 12px 18px;
         bottom: 10px;
@@ -300,7 +302,12 @@ img {
         height: 25vmin;
     }
 
-    .large-job-btn img {
+    .large-job-btn img   {
         height: 15vmin;
     }
+}
+
+/* Modal and Problem Title Fonts */
+#instructions-container h1, .modal-box h2, .problem-title {
+    font-family: 'Press Start 2P', system-ui !important;
 }

@@ -1,7 +1,12 @@
+html { font-size: 115%; }
+
 @font-face {
-    font-family: 'cs-buckle-drawn';
-    src: url('../assets/fonts/CsbuckledrawnRegularDemo-Wplzv.otf') format('opentype');
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
+
+
+
 
 body {
     background-color: #e1e3ed;
@@ -10,7 +15,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,23 +39,23 @@ body {
     z-index: 100;
 }
 
-.topbar-btn {
+.topbar-btn   {
     background: #ffe2e2;
     border: 2px solid #525252;
     border-radius: 6px;
     padding: 6px 14px;
-    font-family: 'cs-buckle-drawn', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'SimpleMinimalist', sans-serif;
+    font-size: 0.90rem;
     cursor: pointer;
     color: #333;
 }
 
-.topbar-btn:hover {
+.topbar-btn:hover   {
     transform: scale(1.05);
 }
 
 .stopwatch {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.9rem;
     color: #272727;
     background: #ffd7d7;
@@ -88,7 +93,7 @@ body {
 }
 
 .problem-title {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.85rem;
     color: #272727;
     margin: 0 0 10px 0;
@@ -110,7 +115,7 @@ body {
     gap: 10px;
 }
 
-.problem-panel-buttons .control-btn {
+.problem-panel-buttons .control-btn   {
     flex: 1;
     padding: 8px 10px;
 }
@@ -125,7 +130,7 @@ body {
 
 .code-editor {
     flex: 1;
-    font-family: 'Courier New', monospace;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.95rem;
     padding: 15px;
     border-radius: 12px;
@@ -143,7 +148,7 @@ body {
     border-radius: 12px;
     border: 2px solid #525252;
     padding: 15px;
-    font-family: 'Courier New', monospace;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.85rem;
     min-height: 140px;
     max-height: 200px;
@@ -157,12 +162,12 @@ body {
     gap: 10px;
 }
 
-.editor-buttons .control-btn {
+.editor-buttons .control-btn   {
     flex: 1;
     max-width: 200px;
 }
 
-.control-btn {
+.control-btn   {
     padding: 8px 18px;
     font-size: 0.95rem;
     cursor: pointer;
@@ -170,29 +175,29 @@ body {
     color: #000;
     border: 2px solid #525252;
     border-radius: 8px;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
     transition: all 0.1s;
 }
 
-.control-btn:hover {
+.control-btn:hover   {
     transform: translateY(-2px);
 }
 
-.control-btn:active {
+.control-btn:active   {
     transform: translateY(2px);
     box-shadow: none;
 }
 
-.run-btn {
+.run-btn   {
     background-color: #b3f3c2;
 }
 
-.submit-btn {
+.submit-btn   {
     background-color: #ffd7d7;
 }
 
-.info-btn {
+.info-btn   {
     background-color: #e8e8e8;
 }
 
@@ -222,7 +227,7 @@ body {
 }
 
 .modal-box h2 {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 15px;
@@ -242,10 +247,15 @@ body {
     font-size: 1.1rem;
 }
 
-.modal-box .control-btn {
+.modal-box .control-btn   {
     margin-top: 15px;
 }
 
 .hidden {
     display: none !important;
+}
+
+/* Modal and Problem Title Fonts */
+#instructions-container h1, .modal-box h2, .problem-title {
+    font-family: 'Press Start 2P', system-ui !important;
 }

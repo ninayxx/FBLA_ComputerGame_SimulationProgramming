@@ -1,0 +1,13 @@
+html { font-size: 115%; }
+
+@font-face {
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
+}
+
+
+
+/* Modal and Problem Title Fonts */
+#instructions-container h1, .modal-box h2, .problem-title {
+    font-family: 'Press Start 2P', system-ui !important;
+}

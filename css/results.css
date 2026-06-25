@@ -1,6 +1,8 @@
+html { font-size: 115%; }
+
 @font-face {
-    font-family: 'cs-buckle-drawn';
-    src: url('../assets/fonts/CsbuckledrawnRegularDemo-Wplzv.otf') format('opentype');
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
 
 body {
@@ -10,7 +12,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +40,7 @@ main {
 }
 
 .results-title {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 2rem;
     color: #272727;
     margin-bottom: 30px;
@@ -65,7 +67,7 @@ main {
 }
 
 .score-number {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 2rem;
     color: #272727;
     line-height: 1;
@@ -133,7 +135,7 @@ main {
 }
 
 .stat-value {
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1rem;
     color: #272727;
 }
@@ -150,29 +152,34 @@ main {
     align-items: center;
 }
 
-.results-btn {
+.results-btn   {
     background-color: #ffe2e2;
     border: 2px solid #525252;
     border-radius: 8px;
     color: #000;
     padding: 12px 30px;
-    font-size: 1.1rem;
-    font-family: 'cs-buckle-drawn', sans-serif;
+    font-size: 1.10rem;
+    font-family: 'SimpleMinimalist', sans-serif;
     cursor: pointer;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
     transition: transform 0.1s;
     min-width: 250px;
 }
 
-.results-btn:hover {
+.results-btn:hover   {
     transform: translateY(-2px);
 }
 
-.results-btn:active {
+.results-btn:active   {
     transform: translateY(2px);
     box-shadow: none;
 }
 
-.back-btn {
+.back-btn   {
     background-color: #b3f3c2;
+}
+
+/* Modal and Problem Title Fonts */
+#instructions-container h1, .modal-box h2, .problem-title {
+    font-family: 'Press Start 2P', system-ui !important;
 }
