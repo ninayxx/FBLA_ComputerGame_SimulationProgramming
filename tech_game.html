@@ -35,14 +35,25 @@
             <div id="problem-desc" class="problem-desc"></div>
             <div class="problem-panel-buttons">
                 <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
-                <button class="control-btn info-btn" onclick="showCheatSheet()">📋 JS Cheat Sheet</button>
+                <button class="control-btn info-btn" onclick="showCheatSheet()">JS Cheat Sheet</button>
             </div>
         </div>
         <div class="editor-panel">
-            <textarea id="code-editor" class="code-editor" spellcheck="false"></textarea>
+            <div class="dnd-workspace">
+                <div class="dnd-column">
+                    <div class="dnd-column-header">Available Blocks</div>
+                    <div class="dnd-zone" id="available-blocks"></div>
+                </div>
+                <div class="dnd-column">
+                    <div class="dnd-column-header">Your Solution</div>
+                    <div class="dnd-zone dnd-solution" id="solution-blocks">
+                        <div class="dnd-placeholder" id="solution-placeholder">Drag code blocks here in the correct order</div>
+                    </div>
+                </div>
+            </div>
             <div id="output-console" class="output-console">Output will appear here...</div>
             <div class="editor-buttons">
-                <button class="control-btn run-btn" onclick="runCode()">Run</button>
+                <button class="control-btn run-btn" onclick="runCode()">Check</button>
                 <button class="control-btn submit-btn" onclick="submitCode()">Submit</button>
             </div>
         </div>
@@ -52,13 +63,12 @@
             <h2>How to Play - Tech Challenge</h2>
             <ul>
                 <li>Read the coding problem on the left panel</li>
-                <li>Write your JavaScript function in the editor</li>
-                <li>Click <strong>Run</strong> to test against 5 example cases</li>
-                <li>Check the output console for pass/fail results</li>
-                <li>Click <strong>Submit</strong> when you're ready — your score is based on accuracy (70%) and speed
-                    (30%). <strong>Time penalties begin after 3 minutes.</strong></li>
-                <li>Use <strong>Tab</strong> to indent your code</li>
-                <li>Use the <strong>📋 JS Cheat Sheet</strong> if you need a syntax reference</li>
+                <li>Drag code blocks from <strong>Available Blocks</strong> into <strong>Your Solution</strong></li>
+                <li>Arrange them in the <strong>correct order</strong> to solve the problem</li>
+                <li>Some blocks are <strong>distractors</strong> — they look real but don't belong!</li>
+                <li>Click <strong>Check</strong> to test your arrangement</li>
+                <li>Click <strong>Submit</strong> when you're ready — your score is based on accuracy (70%) and speed (30%). <strong>Time penalties begin after 1.5 minutes (90 seconds).</strong></li>
+                <li>Use the <strong>JS Cheat Sheet</strong> if you need to understand what a line of code does</li>
             </ul>
             <button class="control-btn" onclick="hideInstructions()">Got it!</button>
         </div>
@@ -91,7 +101,9 @@ str.toUpperCase()
 str.toLowerCase()
 str.split("")
 str.charAt(0)
-str.includes("abc")</pre>
+str.includes("abc")
+str.indexOf("abc")
+str.slice(1)</pre>
 
                 <p><strong>Common Array Methods:</strong></p>
                 <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">arr.push(item)
@@ -109,9 +121,21 @@ Math.floor(x)
 Math.ceil(x)
 Math.abs(x)
 x % 2 === 0  // even check</pre>
+
+                <p><strong>Operators:</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">+   // add
+-   // subtract
+*   // multiply
+/   // divide
+%   // remainder (modulo)
++=  // add and assign
+*=  // multiply and assign
+=== // strict equality
+!== // strict inequality</pre>
             </div>
             <button class="control-btn" onclick="hideCheatSheet()">Close</button>
         </div>
+    </div>
     <script src="js/tech_game.js"></script>
 </body>
 

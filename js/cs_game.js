@@ -384,8 +384,8 @@ function submitOrder() {
     var accuracy = 100;
 
     var timePenalty = 0;
-    if (timerSeconds > 15) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 15) / 3) * 5);
+    if (timerSeconds > 10) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 10) / 3) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);

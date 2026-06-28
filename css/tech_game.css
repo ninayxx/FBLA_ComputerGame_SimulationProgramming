@@ -5,9 +5,6 @@ html { font-size: 115%; }
     src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
 
-
-
-
 body {
     background-color: #e1e3ed;
     background-image: url('../assets/images/locations/game-background.jpg');
@@ -81,7 +78,7 @@ body {
 }
 
 .problem-panel {
-    flex: 1 1 33%;
+    flex: 1 1 28%;
     background: #ffffff;
     border-radius: 12px;
     border: 1px solid #ddd;
@@ -120,41 +117,161 @@ body {
     padding: 8px 10px;
 }
 
+/* ===== Drag & Drop Workspace ===== */
+
 .editor-panel {
-    flex: 2 1 62%;
+    flex: 2 1 68%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     min-width: 0;
 }
 
-.code-editor {
+.dnd-workspace {
     flex: 1;
-    font-family: 'SimpleMinimalist', sans-serif;
-    font-size: 0.95rem;
-    padding: 15px;
-    border-radius: 12px;
-    border: 2px solid #525252;
-    resize: none;
-    outline: none;
-    background: #fafafa;
-    line-height: 1.5;
-    tab-size: 4;
-    min-height: 300px;
+    display: flex;
+    gap: 12px;
+    min-height: 0;
 }
+
+.dnd-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.dnd-column-header {
+    font-family: 'SimpleMinimalist', sans-serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #272727;
+    padding: 8px 12px;
+    background: #fff;
+    border: 2px solid #525252;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.dnd-zone {
+    flex: 1;
+    background: #fafafa;
+    border: 2px solid #525252;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 120px;
+    transition: background 0.2s;
+}
+
+.dnd-zone.drag-over {
+    background: #eef6ff;
+    border-color: #6ba3d6;
+}
+
+.dnd-solution {
+    background: #f5fff5;
+}
+
+.dnd-solution.drag-over {
+    background-color: #e0f5e0;
+    /* Create exactly 4 vertical indent lines (max 3 indents) */
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px);
+    background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+    background-position: 10px 0, 35px 0, 60px 0, 85px 0;
+    background-repeat: no-repeat;
+    border-color: #5ca85c;
+}
+
+.dnd-placeholder {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 30px 15px;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+/* ===== Code Blocks ===== */
+
+.code-block {
+    background: #fff;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.82rem;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, background 0.15s;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+}
+
+.code-block:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    border-color: #888;
+}
+
+.code-block:active {
+    cursor: grabbing;
+}
+
+.code-block.dragging {
+    opacity: 0.4;
+    transform: scale(0.96);
+    border-style: dashed;
+}
+
+.code-block.touch-ghost {
+    opacity: 0.85;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transform: scale(1.03);
+    border-color: #666;
+}
+
+
+
+.code-block.block-correct {
+    background: #e8f5e9;
+    border-color: #4caf50;
+}
+
+.code-block.block-wrong {
+    background: #fce4e4;
+    border-color: #e57373;
+}
+
+.code-block code {
+    pointer-events: none;
+}
+
+/* ===== Output Console ===== */
 
 .output-console {
     background: #fafafa;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 2px solid #525252;
-    padding: 15px;
+    padding: 12px 15px;
     font-family: 'SimpleMinimalist', sans-serif;
-    font-size: 0.85rem;
-    min-height: 140px;
-    max-height: 200px;
+    font-size: 0.82rem;
+    min-height: 80px;
+    max-height: 140px;
     overflow-y: auto;
     color: #272727;
 }
+
+/* ===== Buttons ===== */
 
 .editor-buttons {
     display: flex;
@@ -200,6 +317,8 @@ body {
 .info-btn   {
     background-color: #e8e8e8;
 }
+
+/* ===== Modals ===== */
 
 .modal-overlay {
     position: fixed;

@@ -29,21 +29,36 @@ function generateBusinessRound() {
 
     var orderedItems = dollarItems;
 
-    var addTotal = 0;
-    var subTotal = 0;
-    var rateMult = 1;
+    // Simulate the running total and cap subtractions so it never goes negative
+    var runningTotal = 0;
     for (var k = 0; k < orderedItems.length; k++) {
         if (orderedItems[k].type === 'add') {
-            addTotal += orderedItems[k].value;
+            runningTotal += orderedItems[k].value;
         } else if (orderedItems[k].type === 'subtract') {
-            subTotal += orderedItems[k].value;
+            // Cap the subtraction so total doesn't drop below 0
+            if (orderedItems[k].value > runningTotal) {
+                orderedItems[k].value = runningTotal;
+                orderedItems[k].display = '$' + runningTotal.toLocaleString();
+            }
+            runningTotal -= orderedItems[k].value;
         } else if (orderedItems[k].type === 'interest') {
-            rateMult *= (1 + orderedItems[k].value / 100);
+            runningTotal = runningTotal * (1 + orderedItems[k].value / 100);
         }
     }
 
-    var answer = (addTotal - subTotal) * rateMult;
-    answer = Math.round(answer * 100) / 100;
+    // Recalculate the correct answer from the final ordered items
+    var total = 0;
+    for (var m = 0; m < orderedItems.length; m++) {
+        if (orderedItems[m].type === 'add') {
+            total += orderedItems[m].value;
+        } else if (orderedItems[m].type === 'subtract') {
+            total -= orderedItems[m].value;
+        } else if (orderedItems[m].type === 'interest') {
+            total = total * (1 + orderedItems[m].value / 100);
+        }
+    }
+
+    var answer = Math.round(total * 100) / 100;
 
     return {
         items: orderedItems,

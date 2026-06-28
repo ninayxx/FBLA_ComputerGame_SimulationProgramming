@@ -233,8 +233,8 @@ function submitAnswer() {
     var accuracy = Math.max(0, Math.round(100 - errorPercent * 10));
 
     var timePenalty = 0;
-    if (timerSeconds > 120) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 120) / 20) * 5);
+    if (timerSeconds > 60) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 60) / 15) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
