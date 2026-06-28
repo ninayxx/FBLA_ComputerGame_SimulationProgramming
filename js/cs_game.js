@@ -1,5 +1,7 @@
-var TOTAL_ITEMS = 15;
-var basketCount = 0;
+var currentScenario = null;
+var currentRound = 0;
+var totalRounds = 3;
+var roundScores = [];
 var timerSeconds = 0;
 var timerInterval = null;
 var bgMusic = null;
@@ -7,35 +9,9 @@ var tickSound = null;
 var soundPool = {};
 var hasSubmitted = false;
 var introAudios = [];
+var selectedResponse = null;
+var draggedOptionEl = null;
 
-
-var groceryItems = [
-    { emoji: '🍎', name: 'Apple' },
-    { emoji: '🍌', name: 'Banana' },
-    { emoji: '🥖', name: 'Bread' },
-    { emoji: '🧀', name: 'Cheese' },
-    { emoji: '🥛', name: 'Milk' },
-    { emoji: '🥚', name: 'Eggs' },
-    { emoji: '🍅', name: 'Tomato' },
-    { emoji: '🥕', name: 'Carrot' },
-    { emoji: '🫐', name: 'Blueberry' },
-    { emoji: '🍇', name: 'Grapes' },
-    { emoji: '🥦', name: 'Broccoli' },
-    { emoji: '🌽', name: 'Corn' },
-    { emoji: '🍞', name: 'Toast' },
-    { emoji: '🧈', name: 'Butter' },
-    { emoji: '🍗', name: 'Chicken' },
-    { emoji: '🥩', name: 'Steak' },
-    { emoji: '🐟', name: 'Fish' },
-    { emoji: '🍊', name: 'Orange' },
-    { emoji: '🥑', name: 'Avocado' },
-    { emoji: '🍋', name: 'Lemon' },
-    { emoji: '🫛', name: 'Peas' },
-    { emoji: '🧅', name: 'Onion' },
-    { emoji: '🥔', name: 'Potato' },
-    { emoji: '🍓', name: 'Strawberry' },
-    { emoji: '🫘', name: 'Beans' }
-];
 
 document.addEventListener('DOMContentLoaded', function () {
     preloadSounds();
@@ -55,7 +31,7 @@ function playIntro() {
         return;
     }
 
-    var soundFiles = ['checkout'];
+    var soundFiles = ['chatter', 'ringing', 'chatter', 'typing'];
     introAudios = soundFiles.map(function (name) {
         var audio = new Audio('assets/audio/sfx/' + name + '.mp3');
         audio.volume = 0.4;
@@ -101,8 +77,7 @@ function playIntro() {
 function startGame() {
     startTimer();
     startBackgroundMusic();
-    buildShelf();
-    setupBasketDropZone();
+    pickScenario();
     showInstructions();
 }
 
@@ -194,198 +169,299 @@ function stopTimer() {
 }
 
 
-function buildShelf() {
-    var shelf = document.getElementById('items-shelf');
-    shelf.innerHTML = '';
+function pickScenario() {
+    var idx = Math.floor(Math.random() * csScenarios.length);
+    currentScenario = csScenarios[idx];
+    currentRound = 0;
+    roundScores = [];
+    selectedResponse = null;
 
-    var pool = groceryItems.slice();
-    for (var i = pool.length - 1; i > 0; i--) {
+    document.getElementById('scenario-title').textContent = currentScenario.title;
+    document.getElementById('scenario-desc').textContent = currentScenario.situation;
+    document.getElementById('customer-name').textContent = currentScenario.customerName;
+    document.getElementById('customer-emoji').textContent = currentScenario.customerEmoji;
+
+    updateProgressDots();
+    showRound();
+}
+
+
+function showRound() {
+    var round = currentScenario.rounds[currentRound];
+    selectedResponse = null;
+    draggedOptionEl = null;
+
+    // Update chat area
+    var chatArea = document.getElementById('chat-area');
+    
+    // Add customer message
+    var customerBubble = document.createElement('div');
+    customerBubble.className = 'chat-bubble customer-bubble';
+    customerBubble.innerHTML = '<span class="bubble-name">' + currentScenario.customerEmoji + ' ' + currentScenario.customerName + '</span>' +
+        '<p>' + round.customerText + '</p>';
+    chatArea.appendChild(customerBubble);
+
+    // Add reply drop zone
+    var replyZone = document.createElement('div');
+    replyZone.className = 'chat-bubble reply-zone';
+    replyZone.id = 'reply-zone-' + currentRound;
+    replyZone.innerHTML = '<span class="bubble-name">🧑‍💼 You (Agent)</span>' +
+        '<div class="drop-target" id="drop-target-' + currentRound + '"><p class="drop-hint">Drag your response here...</p></div>';
+    chatArea.appendChild(replyZone);
+
+    // Scroll to bottom after rendering
+    setTimeout(function() {
+        chatArea.scrollTo({
+            top: chatArea.scrollHeight,
+            behavior: 'smooth'
+        });
+    }, 50);
+
+    // Setup drop zone
+    setupDropTarget();
+
+    // Build response options
+    buildOptions(round.options);
+
+    // Update button states
+    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('submit-btn').textContent = 'Send Response';
+    document.getElementById('feedback').textContent = '';
+
+    updateProgressDots();
+}
+
+
+function buildOptions(options) {
+    var container = document.getElementById('options-container');
+    container.innerHTML = '';
+
+    // Shuffle options
+    var shuffled = options.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var tmp = pool[i];
-        pool[i] = pool[j];
-        pool[j] = tmp;
+        var tmp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = tmp;
     }
-    var chosen = pool.slice(0, TOTAL_ITEMS);
 
-    document.getElementById('basket-total').textContent = TOTAL_ITEMS;
+    shuffled.forEach(function (opt, index) {
+        var card = document.createElement('div');
+        card.className = 'response-option';
+        card.setAttribute('draggable', 'true');
+        card.dataset.score = opt.score;
+        card.dataset.index = index;
+        card.textContent = opt.text;
 
-    chosen.forEach(function (item, index) {
-        var card = createGroceryCard(item, index);
-        shelf.appendChild(card);
+        card.addEventListener('dragstart', function (e) {
+            card.classList.add('dragging');
+            draggedOptionEl = card;
+            e.dataTransfer.setData('text/plain', index.toString());
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        card.addEventListener('dragend', function () {
+            card.classList.remove('dragging');
+        });
+
+        // Touch events
+        card.addEventListener('touchstart', handleOptTouchStart, { passive: false });
+        card.addEventListener('touchmove', handleOptTouchMove, { passive: false });
+        card.addEventListener('touchend', handleOptTouchEnd, { passive: false });
+
+        container.appendChild(card);
     });
 }
 
-function createGroceryCard(item, index) {
-    var card = document.createElement('div');
-    card.className = 'grocery-item';
-    card.setAttribute('draggable', 'true');
-    card.dataset.index = index;
-    card.dataset.name = item.name;
 
-    var emoji = document.createElement('div');
-    emoji.className = 'item-emoji';
-    emoji.textContent = item.emoji;
+// Touch drag for response options
+var touchOptEl = null;
+var touchOptClone = null;
+var touchOptOffX = 0;
+var touchOptOffY = 0;
 
-    var name = document.createElement('div');
-    name.className = 'item-name';
-    name.textContent = item.name;
-
-    card.appendChild(emoji);
-    card.appendChild(name);
-
-    card.addEventListener('dragstart', function (e) {
-        card.classList.add('dragging');
-        e.dataTransfer.setData('text/plain', index.toString());
-        e.dataTransfer.effectAllowed = 'move';
-    });
-
-    card.addEventListener('dragend', function () {
-        card.classList.remove('dragging');
-    });
-
-    card.addEventListener('touchstart', handleTouchStart, { passive: false });
-    card.addEventListener('touchmove', handleTouchMove, { passive: false });
-    card.addEventListener('touchend', handleTouchEnd, { passive: false });
-
-    return card;
-}
-
-
-var touchDragEl = null;
-var touchOffsetX = 0;
-var touchOffsetY = 0;
-var touchClone = null;
-
-function handleTouchStart(e) {
+function handleOptTouchStart(e) {
     if (hasSubmitted) return;
     var card = e.currentTarget;
-    if (card.classList.contains('in-basket')) return;
+    if (card.classList.contains('placed')) return;
 
     e.preventDefault();
-    touchDragEl = card;
+    touchOptEl = card;
     var touch = e.touches[0];
     var rect = card.getBoundingClientRect();
-    touchOffsetX = touch.clientX - rect.left;
-    touchOffsetY = touch.clientY - rect.top;
+    touchOptOffX = touch.clientX - rect.left;
+    touchOptOffY = touch.clientY - rect.top;
 
-    touchClone = card.cloneNode(true);
-    touchClone.style.position = 'fixed';
-    touchClone.style.zIndex = '9000';
-    touchClone.style.pointerEvents = 'none';
-    touchClone.style.opacity = '0.85';
-    touchClone.style.width = rect.width + 'px';
-    touchClone.style.height = rect.height + 'px';
-    touchClone.style.left = (touch.clientX - touchOffsetX) + 'px';
-    touchClone.style.top = (touch.clientY - touchOffsetY) + 'px';
-    document.body.appendChild(touchClone);
-
+    touchOptClone = card.cloneNode(true);
+    touchOptClone.style.position = 'fixed';
+    touchOptClone.style.zIndex = '9000';
+    touchOptClone.style.pointerEvents = 'none';
+    touchOptClone.style.opacity = '0.85';
+    touchOptClone.style.width = rect.width + 'px';
+    touchOptClone.style.left = (touch.clientX - touchOptOffX) + 'px';
+    touchOptClone.style.top = (touch.clientY - touchOptOffY) + 'px';
+    document.body.appendChild(touchOptClone);
     card.classList.add('dragging');
 }
 
-function handleTouchMove(e) {
-    if (!touchDragEl || !touchClone) return;
+function handleOptTouchMove(e) {
+    if (!touchOptEl || !touchOptClone) return;
     e.preventDefault();
     var touch = e.touches[0];
-    touchClone.style.left = (touch.clientX - touchOffsetX) + 'px';
-    touchClone.style.top = (touch.clientY - touchOffsetY) + 'px';
+    touchOptClone.style.left = (touch.clientX - touchOptOffX) + 'px';
+    touchOptClone.style.top = (touch.clientY - touchOptOffY) + 'px';
 
-    var basket = document.getElementById('basket-zone');
-    var basketRect = basket.getBoundingClientRect();
-    if (touch.clientX >= basketRect.left && touch.clientX <= basketRect.right &&
-        touch.clientY >= basketRect.top && touch.clientY <= basketRect.bottom) {
-        basket.classList.add('drag-over');
-    } else {
-        basket.classList.remove('drag-over');
+    var target = document.getElementById('drop-target-' + currentRound);
+    if (target) {
+        var tRect = target.getBoundingClientRect();
+        if (touch.clientX >= tRect.left && touch.clientX <= tRect.right &&
+            touch.clientY >= tRect.top && touch.clientY <= tRect.bottom) {
+            target.classList.add('drag-over');
+        } else {
+            target.classList.remove('drag-over');
+        }
     }
 }
 
-function handleTouchEnd(e) {
-    if (!touchDragEl || !touchClone) return;
+function handleOptTouchEnd(e) {
+    if (!touchOptEl || !touchOptClone) return;
     e.preventDefault();
     var touch = e.changedTouches[0];
 
-    var basket = document.getElementById('basket-zone');
-    var basketRect = basket.getBoundingClientRect();
-    basket.classList.remove('drag-over');
-
-    if (touch.clientX >= basketRect.left && touch.clientX <= basketRect.right &&
-        touch.clientY >= basketRect.top && touch.clientY <= basketRect.bottom) {
-        moveToBasket(touchDragEl);
+    var target = document.getElementById('drop-target-' + currentRound);
+    if (target) {
+        var tRect = target.getBoundingClientRect();
+        target.classList.remove('drag-over');
+        if (touch.clientX >= tRect.left && touch.clientX <= tRect.right &&
+            touch.clientY >= tRect.top && touch.clientY <= tRect.bottom) {
+            placeResponse(touchOptEl);
+        }
     }
 
-    touchDragEl.classList.remove('dragging');
-    if (touchClone && touchClone.parentNode) {
-        touchClone.parentNode.removeChild(touchClone);
+    touchOptEl.classList.remove('dragging');
+    if (touchOptClone && touchOptClone.parentNode) {
+        touchOptClone.parentNode.removeChild(touchOptClone);
     }
-    touchDragEl = null;
-    touchClone = null;
+    touchOptEl = null;
+    touchOptClone = null;
 }
 
 
-function setupBasketDropZone() {
-    var basket = document.getElementById('basket-zone');
+function setupDropTarget() {
+    var target = document.getElementById('drop-target-' + currentRound);
+    if (!target) return;
 
-    basket.addEventListener('dragover', function (e) {
+    target.addEventListener('dragover', function (e) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
-        basket.classList.add('drag-over');
+        target.classList.add('drag-over');
     });
 
-    basket.addEventListener('dragleave', function () {
-        basket.classList.remove('drag-over');
+    target.addEventListener('dragleave', function () {
+        target.classList.remove('drag-over');
     });
 
-    basket.addEventListener('drop', function (e) {
+    target.addEventListener('drop', function (e) {
         e.preventDefault();
-        basket.classList.remove('drag-over');
-
-        var index = e.dataTransfer.getData('text/plain');
-        var shelf = document.getElementById('items-shelf');
-        var card = shelf.querySelector('[data-index="' + index + '"]');
-        if (card && !card.classList.contains('in-basket')) {
-            moveToBasket(card);
+        target.classList.remove('drag-over');
+        if (draggedOptionEl) {
+            placeResponse(draggedOptionEl);
         }
     });
 }
 
-function moveToBasket(card) {
+
+function placeResponse(card) {
     if (hasSubmitted) return;
-    if (card.classList.contains('in-basket')) return;
+    if (selectedResponse) return; // Already placed
 
     playSound('drop');
 
-    var basket = document.getElementById('basket-zone');
-    var hint = basket.querySelector('.basket-hint');
-    if (hint) hint.style.display = 'none';
+    selectedResponse = {
+        score: parseInt(card.dataset.score),
+        text: card.textContent
+    };
 
-    card.classList.add('in-basket');
-    card.setAttribute('draggable', 'false');
-    card.classList.remove('dragging');
-    basket.appendChild(card);
+    // Show the response in the drop zone
+    var target = document.getElementById('drop-target-' + currentRound);
+    target.innerHTML = '<p class="placed-response">' + card.textContent + '</p>';
+    target.classList.add('filled');
 
-    basketCount++;
-    document.getElementById('basket-count').textContent = basketCount;
+    // Mark the card as placed
+    card.classList.add('placed');
 
-    if (basketCount >= TOTAL_ITEMS) {
-        document.getElementById('submit-btn').disabled = false;
+    // Disable other options
+    var allOpts = document.querySelectorAll('.response-option');
+    allOpts.forEach(function (opt) {
+        opt.setAttribute('draggable', 'false');
+        if (!opt.classList.contains('placed')) {
+            opt.classList.add('disabled');
+        }
+    });
+
+    // Enable submit
+    document.getElementById('submit-btn').disabled = false;
+}
+
+
+function submitResponse() {
+    if (!selectedResponse) return;
+    if (hasSubmitted) return;
+
+    playSound('click');
+
+    // Record score for this round
+    roundScores.push(selectedResponse.score);
+
+    // Visual feedback on the placed response
+    var target = document.getElementById('drop-target-' + currentRound);
+    if (selectedResponse.score >= 80) {
+        target.classList.add('score-great');
+        document.getElementById('feedback').textContent = '★ Excellent response!';
+    } else if (selectedResponse.score >= 40) {
+        target.classList.add('score-okay');
+        document.getElementById('feedback').textContent = '● Okay response.';
+    } else {
+        target.classList.add('score-poor');
+        document.getElementById('feedback').textContent = '✗ Poor response.';
+    }
+
+    currentRound++;
+
+    if (currentRound >= totalRounds) {
+        // All rounds done — calculate final score
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').textContent = 'Calculating...';
+
+        setTimeout(function () {
+            finishGame();
+        }, 1500);
+    } else {
+        // More rounds
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').textContent = 'Next...';
+
+        setTimeout(function () {
+            showRound();
+        }, 1500);
     }
 }
 
 
-function submitOrder() {
-    if (hasSubmitted) return;
-    if (basketCount < TOTAL_ITEMS) {
-        document.getElementById('feedback').textContent = 'Drag all items into the basket first!';
-        return;
-    }
+function finishGame() {
     hasSubmitted = true;
-    playSound('click');
 
-    var accuracy = 100;
+    // Average the round scores for accuracy
+    var total = 0;
+    for (var i = 0; i < roundScores.length; i++) {
+        total += roundScores[i];
+    }
+    var accuracy = Math.round(total / roundScores.length);
 
+    // Time penalty: grace period = 20s
     var timePenalty = 0;
-    if (timerSeconds > 10) {
-        timePenalty = Math.min(30, Math.floor((timerSeconds - 10) / 3) * 5);
+    if (timerSeconds > 20) {
+        timePenalty = Math.min(30, Math.floor((timerSeconds - 20) / 4) * 5);
     }
     var timeScore = 30 - timePenalty;
     var score = Math.round((accuracy / 100) * 70 + timeScore);
@@ -399,21 +475,40 @@ function submitOrder() {
     sessionStorage.setItem('score', score.toString());
     sessionStorage.setItem('customerServiceGameScore', score.toString());
 
-    var submitBtn = document.getElementById('submit-btn');
-    if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitted';
+    if (score >= 70) {
+        playSound('success');
+    } else {
+        playSound('failure');
     }
 
-    playSound('success');
     document.getElementById('feedback').textContent =
-        'Order complete! Score: ' + score + '/100';
+        'Conversation complete! Score: ' + score + '/100';
 
     if (bgMusic) bgMusic.pause();
 
     setTimeout(function () {
         window.location.href = 'results.html';
     }, 2000);
+}
+
+
+function updateProgressDots() {
+    var dotsContainer = document.getElementById('progress-dots');
+    dotsContainer.innerHTML = '';
+    for (var i = 0; i < totalRounds; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        if (i < currentRound) {
+            dot.classList.add('completed');
+            if (roundScores[i] >= 80) dot.classList.add('dot-great');
+            else if (roundScores[i] >= 40) dot.classList.add('dot-okay');
+            else dot.classList.add('dot-poor');
+        } else if (i === currentRound) {
+            dot.classList.add('active');
+        }
+        dot.textContent = (i + 1);
+        dotsContainer.appendChild(dot);
+    }
 }
 
 

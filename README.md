@@ -46,8 +46,8 @@ The final score consists of two components across all games:
   - **Accuracy:** 100% for successfully identifying the correct corresponding medication pill on the first try; 0% otherwise.
   - **Speed:** 30-second grace period.
 
-### 6. Customer Service Career (Grocery Bagging)
-- **Description:** A high-speed spatial coordination task. Simulating checkout bagging, players are put under intense time pressure to drag and drop 15 separate physics-based grocery items from a right-hand shelf into a left-hand basket.
+### 6. Customer Service Career (Customer Dialogue)
+- **Description:** A customer interaction simulation. Players read an angry or inquiring customer's messages and drag-and-drop the best professional response from a set of options into a reply zone. Each scenario consists of 3 rounds of dialogue, testing empathy, problem-solving, and communication skills.
 - **Scoring:**
-  - **Accuracy:** Defaults to 100% since all 15 items must eventually physically enter the basket threshold to trigger the win condition.
-  - **Speed:** Strict 10-second grace period (10 seconds), as this game represents the lowest cognitive load.
+  - **Accuracy:** Average quality score across the 3 dialogue responses (each response is scored 0-100 based on professionalism and helpfulness).
+  - **Speed:** 20-second grace period.

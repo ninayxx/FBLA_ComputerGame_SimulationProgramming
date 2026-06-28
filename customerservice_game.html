@@ -31,29 +31,34 @@
     </div>
 
     <main class="game-container cs-game-main">
-        <section class="panel basket-panel">
-            <section class="panel-inner">
-                <h2>🛒 Grocery Basket</h2>
-                <div class="basket-zone" id="basket-zone">
-                    <p class="basket-hint">Drag items here!</p>
+        <!-- Left Panel: Chat -->
+        <section class="chat-panel">
+            <div class="scenario-header">
+                <div class="customer-avatar" id="customer-emoji">😡</div>
+                <div class="scenario-info">
+                    <h3 id="scenario-title">Loading...</h3>
+                    <p class="scenario-desc" id="scenario-desc">Loading scenario...</p>
+                    <p class="scenario-desc"><strong>Customer:</strong> <span id="customer-name">...</span></p>
                 </div>
-                <div class="basket-counter">
-                    Items: <span id="basket-count">0</span> / <span id="basket-total">15</span>
-                </div>
-            </section>
+            </div>
+            <div class="progress-bar" id="progress-dots"></div>
+            <div class="chat-area" id="chat-area">
+                <!-- Chat bubbles added dynamically -->
+            </div>
         </section>
 
-        <section class="panel items-panel">
-            <section class="panel-inner">
-                <h2>Grocery Items</h2>
-                <div class="items-shelf" id="items-shelf"></div>
-                <div class="controls">
-                    <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
-                    <button id="submit-btn" class="control-btn submit-btn" onclick="submitOrder()"
-                        disabled>Submit</button>
-                </div>
-                <div id="feedback" class="feedback"></div>
-            </section>
+        <!-- Right Panel: Response Options -->
+        <section class="options-panel">
+            <h2>💬 Your Responses</h2>
+            <div class="options-container" id="options-container">
+                <!-- Response cards added dynamically -->
+            </div>
+            <div class="controls">
+                <button class="control-btn info-btn" onclick="showInstructions()">? How to Play</button>
+                <button id="submit-btn" class="control-btn submit-btn" onclick="submitResponse()"
+                    disabled>Send Response</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
         </section>
     </main>
 
@@ -61,17 +66,17 @@
         <div class="modal-box">
             <h2>How to Play - Customer Service</h2>
             <ul>
-                <li><strong>Drag</strong> grocery items from the right shelf into the <strong>basket</strong> on the
-                    left</li>
-                <li>Fill the basket with all <strong>15 items</strong> to complete the order</li>
-                <li>Once all items are in the basket, click <strong>Submit</strong></li>
-                <li>Your score is based on accuracy (70%) and speed (30%)</li>
-                <li>Work quickly for a higher score! <strong>Time penalties begin after 10 seconds.</strong></li>
+                <li>Read the <strong>customer's message</strong> on the left</li>
+                <li><strong>Drag</strong> the best response from the right and <strong>drop</strong> it into the reply zone</li>
+                <li>Click <strong>Send Response</strong> to submit your reply</li>
+                <li>You'll respond to <strong>3 rounds</strong> of dialogue per scenario</li>
+                <li>Your score is based on response quality (70%) and speed (30%). <strong>Time penalties begin after 20 seconds.</strong></li>
             </ul>
             <button class="control-btn" onclick="hideInstructions()">Got it!</button>
         </div>
     </div>
 
+    <script src="js/cs_questions.js"></script>
     <script src="js/cs_game.js"></script>
 </body>
 
