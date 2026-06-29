@@ -24,6 +24,17 @@ function generateBusinessRound() {
 
     dollarItems = shuffleArr(dollarItems);
 
+    if (dollarItems[0].type !== 'add') {
+        for (var i = 1; i < dollarItems.length; i++) {
+            if (dollarItems[i].type === 'add') {
+                var temp = dollarItems[0];
+                dollarItems[0] = dollarItems[i];
+                dollarItems[i] = temp;
+                break;
+            }
+        }
+    }
+
     var insertPos = randomInt(Math.floor(dollarItems.length / 2), dollarItems.length);
     dollarItems.splice(insertPos, 0, interestItems[0]);
 
@@ -35,10 +46,14 @@ function generateBusinessRound() {
         if (orderedItems[k].type === 'add') {
             runningTotal += orderedItems[k].value;
         } else if (orderedItems[k].type === 'subtract') {
-            // Cap the subtraction so total doesn't drop below 0
             if (orderedItems[k].value > runningTotal) {
                 orderedItems[k].value = runningTotal;
                 orderedItems[k].display = '$' + runningTotal.toLocaleString();
+            }
+            if (orderedItems[k].value === 0) {
+                orderedItems.splice(k, 1);
+                k--;
+                continue;
             }
             runningTotal -= orderedItems[k].value;
         } else if (orderedItems[k].type === 'interest') {
