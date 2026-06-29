@@ -11,6 +11,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('accuracy-display').textContent = Math.round(accuracy) + '%';
 
+    var gracePeriods = {
+        'customer-service': 20,
+        'medical': 30,
+        'tech': 90,
+        'eng': 60,
+        'art': 30,
+        'business': 60
+    };
+    var gracePeriod = gracePeriods[gameType] || 0;
+    var overtime = Math.max(0, timeTaken - gracePeriod);
+    
+    var overtimeEl = document.getElementById('overtime-display');
+    if (overtimeEl) {
+        if (overtime > 0) {
+            overtimeEl.textContent = '+' + overtime + 's overtime';
+        } else {
+            overtimeEl.textContent = '';
+        }
+    }
+
     animateScore(score);
     renderStars(score);
 
