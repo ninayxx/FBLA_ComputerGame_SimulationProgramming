@@ -149,9 +149,9 @@ body {
 }
 
 .dnd-column-header {
-    <<<<<<< HEAD font-family: 'Opendyslexicbold', sans-serif;
-    =======font-family: 'SimpleMinimalist', sans-serif;
-    >>>>>>>efbcba6cda56105f4aea5dfff94b7866204a51f1 font-size: 1.1rem;
+    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #272727;
     padding: 8px 12px;
