@@ -1,8 +1,8 @@
-html { font-size: 100%; }
+html { font-size: 115%; }
 
 @font-face {
-    font-family: 'Opendyslexicbold';
-    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
 
 

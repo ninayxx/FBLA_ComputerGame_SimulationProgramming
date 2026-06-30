@@ -1,8 +1,8 @@
-html { font-size: 100%; }
+html { font-size: 115%; }
 
 @font-face {
-    font-family: 'Opendyslexicbold';
-    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
+    font-family: 'SimpleMinimalist';
+    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
 }
 
 body {
@@ -12,7 +12,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,7 +43,7 @@ body {
     border: 2px solid #525252;
     border-radius: 6px;
     padding: 6px 14px;
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.90rem;
     cursor: pointer;
     color: #333;
@@ -54,7 +54,7 @@ body {
 }
 
 .stopwatch {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.9rem;
     color: #272727;
     background: #ffd7d7;
@@ -153,7 +153,7 @@ body {
 }
 
 .flash-number {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 3.2rem;
     font-weight: bold;
     opacity: 0;
@@ -189,7 +189,7 @@ body {
 
 
 .flash-progress {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.7rem;
     color: #555;
     margin-top: 16px;
@@ -266,7 +266,7 @@ body {
 }
 
 .input-label {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 0.8rem;
     color: #333;
     text-align: center;
@@ -280,7 +280,7 @@ body {
 }
 
 .dollar-prefix {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1.2rem;
     color: #333;
 }
@@ -288,7 +288,7 @@ body {
 .answer-input {
     flex: 1;
     padding: 12px 16px;
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1rem;
     border: 2px solid #525252;
     border-radius: 8px;
@@ -319,7 +319,7 @@ body {
     color: #000;
     border: 2px solid #525252;
     border-radius: 8px;
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-weight: bold;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
     transition: all 0.1s;
@@ -390,7 +390,7 @@ body {
 }
 
 .modal-box h2 {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 15px;
@@ -441,7 +441,7 @@ body {
 }
 
 .countdown-text {
-    font-family: 'Opendyslexicbold', sans-serif;
+    font-family: 'SimpleMinimalist', sans-serif;
     font-size: 2rem;
     color: #333;
     animation: pulse 0.8s ease-in-out infinite;
