@@ -1,8 +1,8 @@
-html { font-size: 115%; }
+html { font-size: 100%; }
 
 @font-face {
-    font-family: 'SimpleMinimalist';
-    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
+    font-family: 'Opendyslexicbold';
+    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
 }
 
 body {
@@ -12,7 +12,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +40,7 @@ main {
 }
 
 .results-title {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 2rem;
     color: #272727;
     margin-bottom: 30px;
@@ -67,7 +67,7 @@ main {
 }
 
 .score-number {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 2rem;
     color: #272727;
     line-height: 1;
@@ -126,6 +126,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     min-width: 120px;
 }
@@ -135,7 +136,7 @@ main {
 }
 
 .stat-value {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 1rem;
     color: #272727;
 }
@@ -159,7 +160,7 @@ main {
     color: #000;
     padding: 12px 30px;
     font-size: 1.10rem;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     cursor: pointer;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
     transition: transform 0.1s;

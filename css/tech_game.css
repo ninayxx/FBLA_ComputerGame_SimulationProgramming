@@ -1,8 +1,13 @@
-html { font-size: 115%; }
+html { font-size: 100%; }
 
 @font-face {
-    font-family: 'SimpleMinimalist';
-    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
+    font-family: 'Opendyslexicbold';
+    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Opendyslexicbold';
+    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
 }
 
 body {
@@ -12,7 +17,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +46,7 @@ body {
     border: 2px solid #525252;
     border-radius: 6px;
     padding: 6px 14px;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.90rem;
     cursor: pointer;
     color: #333;
@@ -52,7 +57,7 @@ body {
 }
 
 .stopwatch {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.9rem;
     color: #272727;
     background: #ffd7d7;
@@ -90,7 +95,7 @@ body {
 }
 
 .problem-title {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.85rem;
     color: #272727;
     margin: 0 0 10px 0;
@@ -142,8 +147,8 @@ body {
 }
 
 .dnd-column-header {
-    font-family: 'SimpleMinimalist', sans-serif;
-    font-size: 0.85rem;
+    font-family: 'Opendyslexicbold', sans-serif;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #272727;
     padding: 8px 12px;
@@ -263,7 +268,7 @@ body {
     border-radius: 10px;
     border: 2px solid #525252;
     padding: 12px 15px;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.82rem;
     min-height: 80px;
     max-height: 140px;
@@ -292,7 +297,7 @@ body {
     color: #000;
     border: 2px solid #525252;
     border-radius: 8px;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
     transition: all 0.1s;
 }
@@ -346,7 +351,7 @@ body {
 }
 
 .modal-box h2 {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 15px;

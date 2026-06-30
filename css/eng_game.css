@@ -1,8 +1,8 @@
-html { font-size: 115%; }
+html { font-size: 100%; }
 
 @font-face {
-    font-family: 'SimpleMinimalist';
-    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
+    font-family: 'Opendyslexicbold';
+    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
 }
 
 body {
@@ -12,7 +12,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +41,7 @@ body {
     border: 2px solid #525252;
     border-radius: 6px;
     padding: 6px 14px;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.90rem;
     cursor: pointer;
     color: #333;
@@ -52,7 +52,7 @@ body {
 }
 
 .stopwatch {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.9rem;
     color: #272727;
     background: #ffd7d7;
@@ -104,7 +104,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
 }
 
 .switch {
@@ -118,7 +118,7 @@ body {
     text-align: center;
     user-select: none;
     font-weight: bold;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 1rem;
     transition: all 0.15s;
 }
@@ -142,7 +142,7 @@ body {
     color: #bbb;
     font-size: 0.85rem;
     font-weight: bold;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     transition: all 0.2s;
 }
 
@@ -160,7 +160,7 @@ body {
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: bold;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     border: 2px solid #525252;
     background-color: #8bd1e5;
     color: #333;
@@ -209,7 +209,7 @@ body {
 
 .toolbox h3 {
     margin: 0 0 8px 0;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 0.85rem;
     color: #555;
     text-align: center;
@@ -230,7 +230,7 @@ body {
     border-radius: 8px;
     cursor: grab;
     font-weight: bold;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     border: 2px solid #525252;
     user-select: none;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
@@ -272,7 +272,7 @@ body {
     color: #000;
     border: 2px solid #525252;
     border-radius: 8px;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
     transition: all 0.1s;
 }
@@ -354,7 +354,7 @@ body {
 }
 
 .modal-box h2 {
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 1.1rem;
     margin-top: 0;
     margin-bottom: 15px;

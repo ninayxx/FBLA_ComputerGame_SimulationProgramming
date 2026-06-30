@@ -1,8 +1,8 @@
-html { font-size: 115%; }
+html { font-size: 100%; }
 
 @font-face {
-    font-family: 'SimpleMinimalist';
-    src: url('../assets/fonts/SimpleMinimalist-3lV3z.otf') format('opentype');
+    font-family: 'Opendyslexicbold';
+    src: url('../assets/fonts/OpendyslexicBold-9Yo9n.otf') format('opentype');
 }
 
 @font-face {
@@ -10,13 +10,17 @@ html { font-size: 115%; }
     src: url('../assets/fonts/CsArenoPixelRegularDemo-7Oz9D.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'SimplePixel';
+  src: url('assets/fonts/SimplePixel-Regular.ttf') format('truetype');
+}
 * {
     box-sizing: border-box;
 }
 
 body {
     background-color: #e1e3ed;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +85,7 @@ button   {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     font-size: 1.20rem;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
@@ -126,7 +130,7 @@ img {
 
 #instructions-container h1 {
     margin: 0 0 10px 0;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     font-size: 1.2rem;
 }
 
@@ -255,7 +259,7 @@ img {
     padding: 10px 20px;
     font-size: 1.00rem;
     cursor: pointer;
-    font-family: 'SimpleMinimalist', sans-serif;
+    font-family: 'Opendyslexicbold', sans-serif;
     z-index: 10;
 }
 

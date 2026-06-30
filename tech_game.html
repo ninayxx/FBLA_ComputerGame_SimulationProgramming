@@ -19,10 +19,10 @@
             playsinline></video>
         <div class="letterbox-bar" style="width: 100%; height: 12%; background: black; flex-shrink: 0;"></div>
         <button id="play-intro-btn"
-            style="position: absolute; z-index: 10001; padding: 20px 40px; font-family: 'SimpleMinimalist', sans-serif; font-size: 32px; background: rgba(76, 175, 80, 0.9); color: white; border: none; border-radius: 8px; cursor: pointer;">▶
+            style="position: absolute; z-index: 10001; padding: 20px 40px; font-family: 'Opendyslexicbold', sans-serif; font-size: 32px; background: rgba(76, 175, 80, 0.9); color: white; border: none; border-radius: 8px; cursor: pointer;">▶
             PLAY</button>
         <button id="skip-intro"
-            style="position: absolute; bottom: 50px; right: 30px; padding: 10px 20px; font-family: 'SimpleMinimalist', sans-serif; font-size: 20px; background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white; border-radius: 4px; cursor: pointer; z-index: 10000;">SKIP
+            style="position: absolute; bottom: 50px; right: 30px; padding: 10px 20px; font-family: 'Opendyslexicbold', sans-serif; font-size: 20px; background: rgba(0, 0, 0, 0.7); color: white; border: 2px solid white; border-radius: 4px; cursor: pointer; z-index: 10000;">SKIP
             >></button>
     </div>
     <div class="game-topbar">
@@ -95,32 +95,44 @@ var arr = [1, 2, 3];</pre>
     // do something with arr[i]
 }</pre>
 
+                <p><strong>Syntax Tips (Brackets & Indentation):</strong></p>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">// Every opening bracket { or parenthesis ( must have a closing one!
+// Curly brackets {} define code blocks. Always line up your closing 
+// bracket } with the keyword that started the block!
+
+function example() {           // Opening {
+    if (x > 5) {               // Indented opening {
+        return true;
+    }                          // Lines up with 'if'
+}                              // Lines up with 'function'</pre>
+
                 <p><strong>Common String Methods:</strong></p>
-                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">str.length
-str.toUpperCase()
-str.toLowerCase()
-str.split("")
-str.charAt(0)
-str.includes("abc")
-str.indexOf("abc")
-str.slice(1)</pre>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">str.length          // returns the number of characters in the string
+str.toUpperCase()   // converts the entire string to uppercase
+str.toLowerCase()   // converts the entire string to lowercase
+str.split(" ")      // splits the string into an array of substrings
+str.charAt(0)       // returns the character at the specified index
+str.includes("abc") // returns true if the string contains "abc"
+str.indexOf("abc")  // returns the first index of "abc", or -1 if not found
+str.substring(a,b)  // splits the string from index a to b (inclusive, exclusive)
+str.slice(start)    // extracts a section of a string and returns it</pre>
 
                 <p><strong>Common Array Methods:</strong></p>
-                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">arr.push(item)
-arr.pop()
-arr.length
-arr.indexOf(item)
-arr.reverse()
-arr.join("")
-arr.sort()</pre>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">arr.push(item)    // adds one or more elements to the end of the array
+arr.pop()         // removes the last element from an array and returns it
+arr.length        // returns the number of elements in the array
+arr.indexOf(item) // returns the first index of the element, or -1
+arr.reverse()     // reverses the array in place
+arr.join("")      // joins all elements of the array into a string
+arr.sort()        // sorts the elements of an array in place</pre>
 
                 <p><strong>Math:</strong></p>
-                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">Math.max(a, b)
-Math.min(a, b)
-Math.floor(x)
-Math.ceil(x)
-Math.abs(x)
-x % 2 === 0  // even check</pre>
+                <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">Math.max(a, b)    // returns the largest of the given numbers
+Math.min(a, b)    // returns the smallest of the given numbers
+Math.floor(x)     // rounds down to the nearest integer
+Math.ceil(x)      // rounds up to the nearest integer
+Math.abs(x)       // returns the absolute value of x
+x % 2 === 0       // checks if x is an even number</pre>
 
                 <p><strong>Operators:</strong></p>
                 <pre style="background: #f5f5f5; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.8rem; overflow-x: auto;">+   // add
