@@ -25,6 +25,7 @@ function generateBusinessRound() {
 
         dollarItems = shuffleArr(dollarItems);
 
+
         if (dollarItems[0].type !== 'add') {
             for (var i = 1; i < dollarItems.length; i++) {
                 if (dollarItems[i].type === 'add') {
@@ -81,6 +82,7 @@ function generateBusinessRound() {
                 items: orderedItems,
                 correctAnswer: answer
             };
+        }
         }
     }
 }
